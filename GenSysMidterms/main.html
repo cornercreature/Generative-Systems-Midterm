@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Mode Color Picker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="circle-controls">
+        
+    <h3 class="controls-title">Circle Color</h3>
+    
+    <div class="mode-selector">
+        <button class="mode-btn active" data-mode="rgb" data-target="circle">RGB</button>
+        <button class="mode-btn" data-mode="hsv" data-target="circle">HSV</button>
+        <button class="mode-btn" data-mode="cmyk" data-target="circle">CMYK</button>
+    </div>
+
+    <div id="circleRgbMode" class="color-mode active">
+        <div class="slider-group">
+            <label for="circleRedSlider">Red</label>
+            <div class="slider-container">
+                <input type="range" id="circleRedSlider" class="circle-slider" min="0" max="255" value="255">
+                <span class="value" id="circleRedValue">255</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleGreenSlider">Green</label>
+            <div class="slider-container">
+                <input type="range" id="circleGreenSlider" class="circle-slider" min="0" max="255" value="255">
+                <span class="value" id="circleGreenValue">255</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleBlueSlider">Blue</label>
+            <div class="slider-container">
+                <input type="range" id="circleBlueSlider" class="circle-slider" min="0" max="255" value="255">
+                <span class="value" id="circleBlueValue">255</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="circleHsvMode" class="color-mode">
+        <div class="slider-group">
+            <label for="circleHueSlider">Hue</label>
+            <div class="slider-container">
+                <input type="range" id="circleHueSlider" class="circle-slider" min="0" max="360" value="0">
+                <span class="value" id="circleHueValue">0°</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleSatSlider">Saturation</label>
+            <div class="slider-container">
+                <input type="range" id="circleSatSlider" class="circle-slider" min="0" max="100" value="0">
+                <span class="value" id="circleSatValue">0%</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleValSlider">Value</label>
+            <div class="slider-container">
+                <input type="range" id="circleValSlider" class="circle-slider" min="0" max="100" value="100">
+                <span class="value" id="circleValValue">100%</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="circleCmykMode" class="color-mode">
+        <div class="slider-group">
+            <label for="circleCyanSlider">Cyan</label>
+            <div class="slider-container">
+                <input type="range" id="circleCyanSlider" class="circle-slider" min="0" max="100" value="0">
+                <span class="value" id="circleCyanValue">0%</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleMagentaSlider">Magenta</label>
+            <div class="slider-container">
+                <input type="range" id="circleMagentaSlider" class="circle-slider" min="0" max="100" value="0">
+                <span class="value" id="circleMagentaValue">0%</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleYellowSlider">Yellow</label>
+            <div class="slider-container">
+                <input type="range" id="circleYellowSlider" class="circle-slider" min="0" max="100" value="0">
+                <span class="value" id="circleYellowValue">0%</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <label for="circleBlackSlider">Black</label>
+            <div class="slider-container">
+                <input type="range" id="circleBlackSlider" class="circle-slider" min="0" max="100" value="0">
+                <span class="value" id="circleBlackValue">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="color-code" id="circleColorCode">#FFFFFF</div>
+</div>
+<div class="circle" id="circle">
+    <div class="circle" id="circleTwo"></div>
+</div>
+    <div class="controls">
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="rgb">RGB</button>
+            <button class="mode-btn" data-mode="hsv">HSV</button>
+            <button class="mode-btn" data-mode="cmyk">CMYK</button>
+        </div>
+
+        <div id="rgbMode" class="color-mode active">
+            <div class="slider-group">
+                <label for="redSlider">Red</label>
+                <div class="slider-container">
+                    <input type="range" id="redSlider" min="0" max="255" value="128">
+                    <span class="value" id="redValue">128</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="greenSlider">Green</label>
+                <div class="slider-container">
+                    <input type="range" id="greenSlider" min="0" max="255" value="128">
+                    <span class="value" id="greenValue">128</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="blueSlider">Blue</label>
+                <div class="slider-container">
+                    <input type="range" id="blueSlider" min="0" max="255" value="128">
+                    <span class="value" id="blueValue">128</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="hsvMode" class="color-mode">
+            <div class="slider-group">
+                <label for="hueSlider">Hue</label>
+                <div class="slider-container">
+                    <input type="range" id="hueSlider" min="0" max="360" value="0">
+                    <span class="value" id="hueValue">0°</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="satSlider">Saturation</label>
+                <div class="slider-container">
+                    <input type="range" id="satSlider" min="0" max="100" value="0">
+                    <span class="value" id="satValue">0%</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="valSlider">Value</label>
+                <div class="slider-container">
+                    <input type="range" id="valSlider" min="0" max="100" value="50">
+                    <span class="value" id="valValue">50%</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="cmykMode" class="color-mode">
+            <div class="slider-group">
+                <label for="cyanSlider">Cyan</label>
+                <div class="slider-container">
+                    <input type="range" id="cyanSlider" min="0" max="100" value="0">
+                    <span class="value" id="cyanValue">0%</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="magentaSlider">Magenta</label>
+                <div class="slider-container">
+                    <input type="range" id="magentaSlider" min="0" max="100" value="0">
+                    <span class="value" id="magentaValue">0%</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="yellowSlider">Yellow</label>
+                <div class="slider-container">
+                    <input type="range" id="yellowSlider" min="0" max="100" value="0">
+                    <span class="value" id="yellowValue">0%</span>
+                </div>
+            </div>
+
+            <div class="slider-group">
+                <label for="blackSlider">Black</label>
+                <div class="slider-container">
+                    <input type="range" id="blackSlider" min="0" max="100" value="50">
+                    <span class="value" id="blackValue">50%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-code" id="colorCode">#808080</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
