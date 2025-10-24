@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Mode Color Picker</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
     <div class="header">
@@ -262,6 +263,64 @@
         </div>
 
         <div class="color-code" id="colorCode">#808080</div>
+
+        <button class="generate-report-btn" id="generateReportBtn">Generate Report</button>
+    </div>
+
+    <!-- Report Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+
+            <h1 class="modal-title">Your Color Report</h1>
+
+            <div class="modal-grid">
+                <!-- Left Side: Visual Preview -->
+                <div class="preview-section">
+                    <canvas id="circlePreviewCanvas" width="400" height="400"></canvas>
+                    <div class="preview-swatch" id="previewBackgroundSwatch"></div>
+                </div>
+
+                <!-- Right Side: Color Information -->
+                <div class="color-info-section">
+                    <div class="color-info-item" id="circle3Info">
+                        <h3>Circle 3</h3>
+                        <div class="color-values"></div>
+                    </div>
+
+                    <div class="color-info-item" id="circle2Info">
+                        <h3>Circle 2</h3>
+                        <div class="color-values"></div>
+                    </div>
+
+                    <div class="color-info-item" id="circle1Info">
+                        <h3>Circle 1</h3>
+                        <div class="color-values"></div>
+                    </div>
+
+                    <div class="color-info-item" id="backgroundInfo">
+                        <h3>Background</h3>
+                        <div class="color-values"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placeholder Sections -->
+            <div class="placeholder-section poem-section">
+                <p>Poem Here</p>
+            </div>
+
+            <div class="placeholder-section chime-section">
+                <p>Visualization of Chime Here</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="modal-actions">
+                <button class="modal-btn" id="returnToGeneratorBtn">Return To Generator</button>
+                <button class="modal-btn" id="downloadReportBtn">Download Report</button>
+            </div>
+        </div>
     </div>
 
     <!-- JavaScript Files -->
@@ -271,6 +330,7 @@
     <script src="js/circleInteraction.js"></script>
     <script src="js/blurController.js"></script>
     <script src="js/uiControls.js"></script>
+    <script src="js/modalController.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
