@@ -1,0 +1,28 @@
+# API Keys and Secrets
+# Never commit files with API keys
+*.key
+*.secret
+.env
+.env.local
+
+# If you ever create a config with hardcoded keys, add it here
+# config-private.js
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Node.js
+node_modules/
+package-lock.json

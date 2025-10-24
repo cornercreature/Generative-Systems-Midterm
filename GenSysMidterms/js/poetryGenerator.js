@@ -1,0 +1,199 @@
+// ============================================
+// POETRY GENERATOR
+// ============================================
+// Generates emotionally-charged concrete poetry based on color palettes
+// Uses Claude API with dynamic tone adjustment based on palette characteristics
+
+/**
+ * Analyzes color palette to determine poetry tone and style
+ * @param {Object} colorData - Color palette data
+ * @returns {Object} Analysis with brightness, saturation, variety, and tone descriptors
+ */
+function analyzePaletteTone(colorData) {
+    const colors = [
+        colorData.background,
+        colorData.circle1,
+        colorData.circle2,
+        colorData.circle3
+    ];
+
+    // Calculate mean brightness (HSV value)
+    let totalBrightness = 0;
+    let totalSaturation = 0;
+    const hues = [];
+
+    colors.forEach(color => {
+        const hsv = rgbToHsv(color.r, color.g, color.b);
+        totalBrightness += hsv.v;
+        totalSaturation += hsv.s;
+        hues.push(hsv.h);
+    });
+
+    const meanBrightness = totalBrightness / colors.length;
+    const meanSaturation = totalSaturation / colors.length;
+
+    // Calculate hue variety (standard deviation of hues)
+    const meanHue = hues.reduce((a, b) => a + b, 0) / hues.length;
+    const hueVariance = hues.reduce((sum, h) => sum + Math.pow(h - meanHue, 2), 0) / hues.length;
+    const hueVariety = Math.sqrt(hueVariance);
+
+    // Determine emotional intensity based on saturation
+    let emotionalIntensity;
+    if (meanSaturation > 60) {
+        emotionalIntensity = 'intense';
+    } else if (meanSaturation > 30) {
+        emotionalIntensity = 'moderate';
+    } else {
+        emotionalIntensity = 'subdued';
+    }
+
+    // Determine abstraction level based on hue variety
+    let abstractionLevel;
+    if (hueVariety > 80) {
+        abstractionLevel = 'highly abstract';
+    } else if (hueVariety > 40) {
+        abstractionLevel = 'moderately abstract';
+    } else {
+        abstractionLevel = 'clear and contemplative';
+    }
+
+    // Determine overall tone based on brightness
+    let tonalQuality;
+    if (meanBrightness > 70) {
+        tonalQuality = 'bright and energetic';
+    } else if (meanBrightness > 40) {
+        tonalQuality = 'balanced and thoughtful';
+    } else {
+        tonalQuality = 'dark and introspective';
+    }
+
+    return {
+        meanBrightness,
+        meanSaturation,
+        hueVariety,
+        emotionalIntensity,
+        abstractionLevel,
+        tonalQuality
+    };
+}
+
+/**
+ * Builds the prompt for Claude API based on color data and analysis
+ * @param {Object} colorData - Color palette data
+ * @param {Object} analysis - Palette tone analysis
+ * @returns {string} Formatted prompt for Claude
+ */
+function buildPoetryPrompt(colorData, analysis) {
+    const colors = [
+        { name: 'Background', ...colorData.background },
+        { name: 'Circle One', ...colorData.circle1 },
+        { name: 'Circle Two', ...colorData.circle2 },
+        { name: 'Circle Three', ...colorData.circle3 }
+    ];
+
+    // Build color descriptions
+    const colorDescriptions = colors.map(c => {
+        const hex = rgbToHex(c.r, c.g, c.b);
+        const hsv = rgbToHsv(c.r, c.g, c.b);
+        return `${c.name}: ${hex} (Hue: ${hsv.h}°, Saturation: ${hsv.s}%, Brightness: ${hsv.v}%)`;
+    }).join('\n');
+
+    // Build dynamic tone instructions
+    const toneInstructions = `
+The poem should be:
+- Emotional Intensity: ${analysis.emotionalIntensity} (saturation level: ${Math.round(analysis.meanSaturation)}%)
+- Style: ${analysis.abstractionLevel} (color variety: ${Math.round(analysis.hueVariety)}° hue variance)
+- Tone: ${analysis.tonalQuality} (brightness: ${Math.round(analysis.meanBrightness)}%)
+
+Guidelines:
+- If emotionally intense: use vivid, passionate language and strong imagery
+- If emotionally subdued: use gentle, contemplative, quiet language
+- If highly abstract: use experimental, fragmented, unexpected connections
+- If clear/contemplative: use direct, accessible imagery with cohesive themes
+    `.trim();
+
+    return `You are a concrete poet, creating experimental visual poetry where the arrangement of text on the page is as important as the words themselves.
+
+Given this color palette:
+${colorDescriptions}
+
+${toneInstructions}
+
+Create a concrete poem (10-15 lines) that captures the emotional and aesthetic essence of this palette. The poem should:
+1. Use spacing, line breaks, and visual arrangement to create meaning
+2. Reflect the colors' emotional resonance without directly naming them
+3. Match the specified tone and intensity
+4. Be formatted with intentional spacing and line breaks for visual impact
+5. Work as both text and visual composition
+
+Return ONLY the poem with its visual formatting (using spaces and line breaks). No explanations, titles, or metadata.`;
+}
+
+/**
+ * Generates poetry using Claude API
+ * @param {Object} colorData - Color palette data
+ * @returns {Promise<string>} Generated poem text
+ */
+async function generatePoem(colorData) {
+    // Analyze palette characteristics
+    const analysis = analyzePaletteTone(colorData);
+
+    // Build prompt with dynamic tone
+    const prompt = buildPoetryPrompt(colorData, analysis);
+
+    try {
+        // Call our backend proxy server instead of Claude API directly
+        const response = await fetch('http://localhost:3000/api/generate-poem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                colorData: colorData,
+                prompt: prompt
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Server error: ${errorData.error || 'Unknown error'}`);
+        }
+
+        const data = await response.json();
+        const poemText = data.poem;
+
+        return poemText;
+
+    } catch (error) {
+        console.error('Error generating poetry:', error);
+        throw error;
+    }
+}
+
+/**
+ * Displays poem in the modal with loading state
+ * @param {Object} colorData - Color palette data
+ */
+async function displayPoem(colorData) {
+    const poemContainer = document.querySelector('.poem-section');
+
+    // Show loading state
+    poemContainer.innerHTML = '<p class="poem-loading">Generating poetic interpretation...</p>';
+
+    try {
+        const poem = await generatePoem(colorData);
+
+        // Display the poem
+        poemContainer.innerHTML = `<pre class="poem-text">${poem}</pre>`;
+
+    } catch (error) {
+        console.error('Failed to generate poem:', error);
+
+        let errorMessage = 'Unable to generate poem at this time.';
+        if (error.message.includes('API request failed')) {
+            errorMessage += ' Please check your API connection.';
+        }
+
+        poemContainer.innerHTML = `<p class="poem-error">${errorMessage}</p>`;
+    }
+}

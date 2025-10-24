@@ -1,26 +1,21 @@
 // ============================================
 // API CONFIGURATION
 // ============================================
-// Centralized configuration for external API services
-// IMPORTANT: In production, move API keys to environment variables
-// or a backend service. Never commit API keys to version control.
+// Centralized configuration for Claude API
+// API key is stored in browser localStorage for security
 
 /**
  * Get Claude API configuration
- * Priority order:
- * 1. Environment variable (if available)
- * 2. LocalStorage (for development)
- * 3. Prompt user to enter key
  * @returns {Object} API configuration object
  */
-export function getClaudeConfig() {
-    // Try to get from localStorage (development only)
-    let apiKey = localStorage.getItem('CLAUDE_API_KEY');
+function getClaudeConfig() {
+    // Retrieve API key from localStorage
+    const apiKey = localStorage.getItem('CLAUDE_API_KEY');
 
-    // If no API key found, show warning
     if (!apiKey) {
-        console.warn('Claude API key not found. Poetry generation will fail.');
-        console.info('To set your API key, run: localStorage.setItem("CLAUDE_API_KEY", "your-key-here")');
+        console.warn('⚠️ Claude API key not found in localStorage.');
+        console.info('To set your API key, open the browser console and run:');
+        console.info('localStorage.setItem("CLAUDE_API_KEY", "your-api-key-here")');
     }
 
     return {
@@ -33,10 +28,12 @@ export function getClaudeConfig() {
 }
 
 /**
- * Set Claude API key in localStorage (development only)
- * @param {string} key - API key to store
+ * Helper function to set API key in localStorage
+ * Call this from browser console: setClaudeApiKey('your-key-here')
+ * @param {string} key - Your Claude API key
  */
-export function setClaudeApiKey(key) {
+function setClaudeApiKey(key) {
     localStorage.setItem('CLAUDE_API_KEY', key);
-    console.log('API key stored successfully');
+    console.log('✅ API key saved successfully to localStorage');
+    console.log('You can now use the poetry generation feature!');
 }

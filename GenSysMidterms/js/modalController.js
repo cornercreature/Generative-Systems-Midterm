@@ -19,6 +19,9 @@ function openReportModal() {
 
     // Draw canvas preview
     drawCirclePreview(colorData);
+
+    // Generate and display poem
+    displayPoem(colorData);
 }
 
 /**
