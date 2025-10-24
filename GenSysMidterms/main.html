@@ -6,38 +6,71 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="circle-controls">
-        
-    <h3 class="controls-title">Circle Color</h3>
-    
-    <div class="mode-selector">
-        <button class="mode-btn active" data-mode="rgb" data-target="circle">RGB</button>
-        <button class="mode-btn" data-mode="hsv" data-target="circle">HSV</button>
-        <button class="mode-btn" data-mode="cmyk" data-target="circle">CMYK</button>
+    <div class="header">
+        <p>color*mood*shape</color></p>
     </div>
+    
+    <div class="circle-controls">
+
+    <!-- Circle Controller Section -->
+    <div class="circle-controller-section">
+        <h3 class="controls-title collapsible-header" data-section="controller">
+            Circle Controller
+            <span class="collapse-icon">−</span>
+        </h3>
+        <div class="collapsible-content" id="controllerContent">
+        <div class="circle-controller-container">
+            <div class="controller-circle" id="circleOneController">
+                <div class="controller-circle" id="circleTwoController"></div>
+            </div>
+            <div class="controller-circle" id="circleThreeController"></div>
+        </div>
+        </div>
+    </div>
+    <!-- End Circle Controller Section -->
+
+    <!-- Color Control Section -->
+    <div class="color-control-section">
+        <h3 class="controls-title collapsible-header" data-section="color">
+            Circle Color
+            <span class="collapse-icon">−</span>
+        </h3>
+        <div class="collapsible-content" id="colorContent">
+
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="rgb" data-target="circle">RGB</button>
+            <button class="mode-btn" data-mode="hsv" data-target="circle">HSV</button>
+            <button class="mode-btn" data-mode="cmyk" data-target="circle">CMYK</button>
+        </div>
+
+        <div class="circle-target-selector">
+            <button class="circle-target-btn active" data-circle="1">1</button>
+            <button class="circle-target-btn" data-circle="2">2</button>
+            <button class="circle-target-btn" data-circle="3">3</button>
+        </div>
 
     <div id="circleRgbMode" class="color-mode active">
         <div class="slider-group">
             <label for="circleRedSlider">Red</label>
             <div class="slider-container">
-                <input type="range" id="circleRedSlider" class="circle-slider" min="0" max="255" value="255">
-                <span class="value" id="circleRedValue">255</span>
+                <input type="range" id="circleRedSlider" class="circle-slider" min="0" max="255" value="199">
+                <span class="value" id="circleRedValue">199</span>
             </div>
         </div>
 
         <div class="slider-group">
             <label for="circleGreenSlider">Green</label>
             <div class="slider-container">
-                <input type="range" id="circleGreenSlider" class="circle-slider" min="0" max="255" value="255">
-                <span class="value" id="circleGreenValue">255</span>
+                <input type="range" id="circleGreenSlider" class="circle-slider" min="0" max="255" value="113">
+                <span class="value" id="circleGreenValue">113</span>
             </div>
         </div>
 
         <div class="slider-group">
             <label for="circleBlueSlider">Blue</label>
             <div class="slider-container">
-                <input type="range" id="circleBlueSlider" class="circle-slider" min="0" max="255" value="255">
-                <span class="value" id="circleBlueValue">255</span>
+                <input type="range" id="circleBlueSlider" class="circle-slider" min="0" max="255" value="56">
+                <span class="value" id="circleBlueValue">56</span>
             </div>
         </div>
     </div>
@@ -103,10 +136,38 @@
     </div>
 
     <div class="color-code" id="circleColorCode">#FFFFFF</div>
+    </div>
+    </div>
+    <!-- End Color Control Section -->
+
+    <!-- Blur Control Section -->
+    <div class="blur-control-section">
+        <h3 class="controls-title collapsible-header" data-section="blur">
+            Gaussian Blur
+            <span class="collapse-icon">−</span>
+        </h3>
+        <div class="collapsible-content" id="blurContent">
+
+        <div class="blur-target-selector">
+            <button class="blur-target-btn active" data-blur-circle="2">Two</button>
+            <button class="blur-target-btn" data-blur-circle="3">Three</button>
+        </div>
+
+        <div class="slider-group">
+            <label for="blurSlider">Blur Amount</label>
+            <div class="slider-container">
+                <input type="range" id="blurSlider" min="0" max="20" step="0.5" value="2">
+                <span class="value" id="blurValue">2px</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- End Blur Control Section -->
+
 </div>
-<div class="circle" id="circle">
-    <div class="circle" id="circleTwo"></div>
-</div>
+<div class="circle" id="circle"></div>
+<div class="circle" id="circleTwo"></div>
+<div class="circle" id="circleThree"></div>
     <div class="controls">
         <div class="mode-selector">
             <button class="mode-btn active" data-mode="rgb">RGB</button>
@@ -118,24 +179,24 @@
             <div class="slider-group">
                 <label for="redSlider">Red</label>
                 <div class="slider-container">
-                    <input type="range" id="redSlider" min="0" max="255" value="128">
-                    <span class="value" id="redValue">128</span>
+                    <input type="range" id="redSlider" min="0" max="255" value="255">
+                    <span class="value" id="redValue">255</span>
                 </div>
             </div>
 
             <div class="slider-group">
                 <label for="greenSlider">Green</label>
                 <div class="slider-container">
-                    <input type="range" id="greenSlider" min="0" max="255" value="128">
-                    <span class="value" id="greenValue">128</span>
+                    <input type="range" id="greenSlider" min="0" max="255" value="249">
+                    <span class="value" id="greenValue">249</span>
                 </div>
             </div>
 
             <div class="slider-group">
                 <label for="blueSlider">Blue</label>
                 <div class="slider-container">
-                    <input type="range" id="blueSlider" min="0" max="255" value="128">
-                    <span class="value" id="blueValue">128</span>
+                    <input type="range" id="blueSlider" min="0" max="255" value="154">
+                    <span class="value" id="blueValue">154</span>
                 </div>
             </div>
         </div>
@@ -201,6 +262,8 @@
         </div>
 
         <div class="color-code" id="colorCode">#808080</div>
+
+        <button class="generate-report-btn" id="generateReportBtn">Generate Report</button>
     </div>
 
     <script src="script.js"></script>

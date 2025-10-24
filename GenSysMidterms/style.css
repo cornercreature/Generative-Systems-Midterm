@@ -37,7 +37,82 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 40px;
     z-index: 5;
+    overflow-y: auto;
+}
+
+.color-control-section,
+.blur-control-section,
+.circle-controller-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.circle-controller-section {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.blur-control-section {
+    padding-top: 30px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.circle-controller-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controller-circle {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    border: 1px solid black;
+    background: white;
+}
+
+.controller-circle:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.controller-circle.dragging {
+    cursor: grabbing;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+#circleOneController {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+#circleTwoController {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#circleThreeController {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
 .controls-title {
@@ -49,8 +124,102 @@ body {
     margin-bottom: 20px;
 }
 
+.collapsible-header {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s ease;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.collapsible-header:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.collapse-icon {
+    font-size: 20px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.collapsible-header.collapsed .collapse-icon {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.collapsible-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+}
+
 .circle-controls .mode-selector {
+    margin-bottom: 15px;
+}
+
+.circle-target-selector {
+    display: flex;
+    gap: 8px;
     margin-bottom: 30px;
+}
+
+.circle-target-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.circle-target-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.circle-target-btn.active {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.blur-target-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.blur-target-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.blur-target-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.blur-target-btn.active {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .circle-slider#circleRedSlider {
@@ -243,41 +412,79 @@ input[type="range"]::-moz-range-thumb {
     color: #333;
 }
 
+.generate-report-btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.generate-report-btn:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
 .circle {
     position: fixed;
-    width: 200px;
-    height: 200px;
+    width: 600px;
+    height: 600px;
     background: white;
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    cursor: grab;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    cursor: default;
     z-index: 10;
     overflow: hidden;
     pointer-events: none;
 }
 
 .circle.dragging {
-    cursor: grabbing;
-    pointer-events: auto;
+    cursor: default;
+    pointer-events: none;
 }
 
 #circleTwo {
     background: black;
-    width: 120px;
-    height: 120px;
+    width: 350px;
+    height: 350px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: auto;
-    cursor: pointer;
+    pointer-events: none;
+    cursor: default;
 }
 
 #circleTwo.dragging {
-    cursor: grabbing;
+    cursor: default;
+}
+
+#circleThree {
+    background: white;
+    width: 110px;
+    height: 110px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    cursor: default;
+    z-index: 11;
+}
+
+#circleThree.dragging {
+    cursor: default;
 }
 
 .circle.dragging {
