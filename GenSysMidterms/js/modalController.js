@@ -20,8 +20,14 @@ function openReportModal() {
     // Draw canvas preview
     drawCirclePreview(colorData);
 
+    // Initialize waveform visualizer
+    initializeWaveformVisualizer(colorData);
+
     // Generate and display poem
     displayPoem(colorData);
+
+    // Play initial chime after a short delay (let modal settle)
+    playInitialChime(colorData);
 }
 
 /**

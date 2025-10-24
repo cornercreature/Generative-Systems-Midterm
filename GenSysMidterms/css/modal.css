@@ -193,10 +193,36 @@
 }
 
 .chime-section {
-    min-height: 200px;
+    min-height: 250px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 15px;
+    padding: 30px;
+}
+
+/* Chime Canvas */
+#chimeCanvas {
+    width: 100%;
+    max-width: 800px;
+    height: 200px;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#chimeCanvas:hover {
+    transform: scale(1.02);
+}
+
+/* Chime Instruction Text */
+.chime-instruction {
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    margin: 0;
+    font-style: italic;
 }
 
 /* Action Buttons */
