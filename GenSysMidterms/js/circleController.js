@@ -42,20 +42,13 @@ const circle = document.getElementById('circle');
 const circleTwo = document.getElementById('circleTwo');
 const circleThree = document.getElementById('circleThree');
 
-// Circle target selector buttons
-const circleTargetButtons = document.querySelectorAll('.circle-target-btn');
-
 /**
  * Switches the active circle target
  * @param {number} target - Circle number (1, 2, or 3)
+ * Called when controller circles are clicked
  */
 function switchCircleTarget(target) {
     currentCircleTarget = target;
-
-    // Update button active states
-    circleTargetButtons.forEach(btn => {
-        btn.classList.toggle('active', parseInt(btn.dataset.circle) === target);
-    });
 
     // Update sliders to show current target's color
     if (target === 1) {
@@ -289,13 +282,7 @@ function getCurrentCircleColors() {
  * Initializes circle color controller with event listeners
  */
 function initCircleController() {
-    // Circle target switching
-    circleTargetButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetCircle = parseInt(btn.dataset.circle);
-            switchCircleTarget(targetCircle);
-        });
-    });
+    // Circle target switching is now handled by controller circle clicks in circleInteraction.js
 
     // Circle color mode switching
     const modeButtons = document.querySelectorAll('.mode-btn');

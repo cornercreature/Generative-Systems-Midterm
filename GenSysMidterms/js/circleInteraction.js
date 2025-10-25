@@ -78,6 +78,9 @@ function initCircleInteraction() {
                 controllerThreeActive = false;
                 circleTwoController.classList.remove('dragging');
                 circleThreeController.classList.remove('dragging');
+
+                // Switch color control to circle 1
+                switchCircleTarget(1);
             } else {
                 circleOneController.classList.remove('dragging');
             }
@@ -96,6 +99,9 @@ function initCircleInteraction() {
                 controllerThreeActive = false;
                 circleOneController.classList.remove('dragging');
                 circleThreeController.classList.remove('dragging');
+
+                // Switch color control to circle 2
+                switchCircleTarget(2);
             } else {
                 // Start dragging
                 isDraggingControllerTwo = true;
@@ -119,6 +125,9 @@ function initCircleInteraction() {
             controllerTwoActive = false;
             circleOneController.classList.remove('dragging');
             circleTwoController.classList.remove('dragging');
+
+            // Switch color control to circle 3
+            switchCircleTarget(3);
         } else {
             // Start dragging
             isDraggingControllerThree = true;
