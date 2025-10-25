@@ -181,7 +181,7 @@ body {
 .circle-target-btn {
     flex: 1;
     padding: 10px;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
@@ -192,11 +192,14 @@ body {
 }
 
 .circle-target-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .circle-target-btn.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -209,7 +212,7 @@ body {
 .blur-target-btn {
     flex: 1;
     padding: 10px;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
@@ -220,11 +223,14 @@ body {
 }
 
 .blur-target-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .blur-target-btn.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -277,7 +283,7 @@ body {
 .mode-btn {
     flex: 1;
     padding: 10px;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
@@ -288,11 +294,14 @@ body {
 }
 
 .mode-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .mode-btn.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -427,7 +436,7 @@ input[type="range"]::-moz-range-thumb {
 .bg-type-btn {
     flex: 1;
     padding: 10px;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
@@ -438,11 +447,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .bg-type-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .bg-type-btn.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -455,7 +467,7 @@ input[type="range"]::-moz-range-thumb {
 .gradient-stop-btn {
     flex: 1;
     padding: 10px;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
@@ -466,11 +478,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .gradient-stop-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .gradient-stop-btn.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
