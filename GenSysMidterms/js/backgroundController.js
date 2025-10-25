@@ -31,13 +31,13 @@ const blackValue = document.getElementById('blackValue');
 const colorCode = document.getElementById('colorCode');
 
 let currentMode = 'hsv';
-let currentRGB = { r: 255, g: 249, b: 154 };
+let currentRGB = { r: 255, g: 247, b: 0 };
 
 // Gradient mode variables
 let backgroundType = 'flat'; // 'flat' or 'gradient'
 let currentGradientStop = 1; // 1 or 2
-let gradientStop1RGB = { r: 255, g: 249, b: 154 }; // Same as initial background
-let gradientStop2RGB = { r: 200, g: 150, b: 100 }; // Default second color
+let gradientStop1RGB = { r: 255, g: 247, b: 0 }; // Yellow (#FFF700)
+let gradientStop2RGB = { r: 255, g: 255, b: 255 }; // White (#FFFFFF)
 
 /**
  * Updates background from RGB sliders

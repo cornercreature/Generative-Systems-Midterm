@@ -5,9 +5,9 @@
 // Circle color variables
 let currentCircleMode = 'hsv';
 let currentCircleTarget = 1; // 1, 2, or 3
-let currentCircleRGB = { r: 199, g: 113, b: 56 }; // #C77138
-let currentCircleTwoRGB = { r: 155, g: 221, b: 243 }; // #9BDDF3
-let currentCircleThreeRGB = { r: 255, g: 249, b: 237 }; // #FFF9ED
+let currentCircleRGB = { r: 232, g: 225, b: 209 }; // #E8E1D1
+let currentCircleTwoRGB = { r: 245, g: 242, b: 230 }; // #F5F2E6
+let currentCircleThreeRGB = { r: 255, g: 255, b: 255 }; // #FFFFFF
 
 // Circle RGB sliders
 const circleRedSlider = document.getElementById('circleRedSlider');
@@ -315,6 +315,6 @@ function initCircleController() {
 
     // Initialize circle colors
     updateCircleFromRGB();
-    updateCircleTwoColor(155, 221, 243); // #9BDDF3 - Light blue
-    updateCircleThreeColor(255, 249, 237); // #FFF9ED - Very light cream
+    updateCircleTwoColor(245, 242, 230); // #F5F2E6 - Light warm beige
+    updateCircleThreeColor(255, 255, 255); // #FFFFFF - White
 }

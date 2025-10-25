@@ -257,9 +257,9 @@
     border: none;
     background: transparent;
     color: #333;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
+    font-size: 24px;
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.3s ease;

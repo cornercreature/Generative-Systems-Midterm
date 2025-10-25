@@ -1,7 +1,65 @@
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Thin.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Light.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Regular.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Medium.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Bold.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Heavy.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Heavy.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lineal';
+    src: url('../typefaces/lineal/Lineal-Black.woff2') format('woff2'),
+         url('../typefaces/lineal/Lineal-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
 }
 
 body {
@@ -122,9 +180,9 @@ body {
 }
 
 .controls-title {
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 100;
     color: #333;
     text-align: center;
     margin-bottom: 20px;
@@ -187,7 +245,7 @@ body {
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.2s ease;
@@ -195,6 +253,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 1px;
 }
 
 .circle-target-btn:hover {
@@ -222,7 +281,7 @@ body {
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.2s ease;
@@ -230,6 +289,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 1px;
 }
 
 .blur-target-btn:hover {
@@ -297,7 +357,7 @@ body {
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.2s ease;
@@ -305,6 +365,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 1px;
 }
 
 .mode-btn:hover {
@@ -337,8 +398,8 @@ body {
 
 label {
     display: block;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 14px;
     margin-bottom: 8px;
     color: #333;
@@ -422,9 +483,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .value {
-    font-family: 'Courier New', monospace;
+    font-family: 'Lineal', Arial, sans-serif;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 100;
     min-width: 40px;
     text-align: right;
     color: #333;
@@ -434,9 +495,9 @@ input[type="range"]::-moz-range-thumb {
     margin-top: 25px;
     padding-top: 20px;
     text-align: center;
-    font-family: 'Courier New', monospace;
+    font-family: 'Lineal', 'Courier New', monospace;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 100;
     color: #333;
 }
 
@@ -454,7 +515,7 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.3s ease;
@@ -462,6 +523,7 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 1px;
 }
 
 .bg-type-btn:hover {
@@ -489,7 +551,7 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(255, 255, 255, 0.3);
     color: #333;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.3s ease;
@@ -497,6 +559,7 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 1px;
 }
 
 .gradient-stop-btn:hover {
