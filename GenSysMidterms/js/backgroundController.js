@@ -33,6 +33,12 @@ const colorCode = document.getElementById('colorCode');
 let currentMode = 'rgb';
 let currentRGB = { r: 255, g: 249, b: 154 };
 
+// Gradient mode variables
+let backgroundType = 'flat'; // 'flat' or 'gradient'
+let currentGradientStop = 1; // 1 or 2
+let gradientStop1RGB = { r: 255, g: 249, b: 154 }; // Same as initial background
+let gradientStop2RGB = { r: 200, g: 150, b: 100 }; // Default second color
+
 /**
  * Updates background from RGB sliders
  */
@@ -120,8 +126,33 @@ function updateFromCMYK() {
  * @param {number} b - Blue (0-255)
  */
 function updateBackground(r, g, b) {
-    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-    colorCode.textContent = rgbToHex(r, g, b);
+    // Store the color for the current gradient stop
+    if (backgroundType === 'gradient') {
+        if (currentGradientStop === 1) {
+            gradientStop1RGB = { r, g, b };
+        } else {
+            gradientStop2RGB = { r, g, b };
+        }
+        // Apply gradient
+        applyGradient();
+    } else {
+        // Flat color mode
+        document.body.style.background = `rgb(${r}, ${g}, ${b})`;
+        colorCode.textContent = rgbToHex(r, g, b);
+    }
+}
+
+/**
+ * Applies gradient background using both stops
+ */
+function applyGradient() {
+    const color1 = `rgb(${gradientStop1RGB.r}, ${gradientStop1RGB.g}, ${gradientStop1RGB.b})`;
+    const color2 = `rgb(${gradientStop2RGB.r}, ${gradientStop2RGB.g}, ${gradientStop2RGB.b})`;
+    document.body.style.background = `linear-gradient(to bottom, ${color1}, ${color2})`;
+
+    // Display the current stop's color code
+    const currentStopRGB = currentGradientStop === 1 ? gradientStop1RGB : gradientStop2RGB;
+    colorCode.textContent = rgbToHex(currentStopRGB.r, currentStopRGB.g, currentStopRGB.b);
 }
 
 /**
@@ -152,11 +183,115 @@ function switchMode(mode) {
 }
 
 /**
- * Gets current background RGB color
+ * Gets current background RGB color (for flat mode) or gradient stop 1 (for gradient mode)
  * @returns {Object} RGB object with r, g, b properties
  */
 function getCurrentBackgroundRGB() {
-    return currentRGB;
+    // For report generation, return stop 1 if in gradient mode
+    return backgroundType === 'gradient' ? gradientStop1RGB : currentRGB;
+}
+
+/**
+ * Gets gradient colors if in gradient mode
+ * @returns {Object|null} Object with stop1 and stop2, or null if not in gradient mode
+ */
+function getGradientColors() {
+    if (backgroundType === 'gradient') {
+        return {
+            stop1: gradientStop1RGB,
+            stop2: gradientStop2RGB
+        };
+    }
+    return null;
+}
+
+/**
+ * Switches between flat and gradient background types
+ * @param {string} type - 'flat' or 'gradient'
+ */
+function switchBackgroundType(type) {
+    backgroundType = type;
+
+    // Update button states
+    const bgTypeButtons = document.querySelectorAll('.bg-type-btn');
+    bgTypeButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.bgType === type);
+    });
+
+    // Show/hide gradient stop selector
+    const gradientStopSelector = document.getElementById('gradientStopSelector');
+    if (type === 'gradient') {
+        gradientStopSelector.style.display = 'flex';
+        // Load the current stop's color into sliders
+        loadGradientStopToSliders();
+        applyGradient();
+    } else {
+        gradientStopSelector.style.display = 'none';
+        // Revert to flat color using stop 1
+        currentRGB = { ...gradientStop1RGB };
+        document.body.style.background = `rgb(${currentRGB.r}, ${currentRGB.g}, ${currentRGB.b})`;
+        colorCode.textContent = rgbToHex(currentRGB.r, currentRGB.g, currentRGB.b);
+        syncSlidersToRGB();
+    }
+}
+
+/**
+ * Switches between gradient stops
+ * @param {number} stopNumber - 1 or 2
+ */
+function switchGradientStop(stopNumber) {
+    currentGradientStop = stopNumber;
+
+    // Update button states
+    const stopButtons = document.querySelectorAll('.gradient-stop-btn');
+    stopButtons.forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.stop) === stopNumber);
+    });
+
+    // Load the selected stop's color into sliders
+    loadGradientStopToSliders();
+}
+
+/**
+ * Loads the current gradient stop's color into the sliders
+ */
+function loadGradientStopToSliders() {
+    const stopRGB = currentGradientStop === 1 ? gradientStop1RGB : gradientStop2RGB;
+    currentRGB = { ...stopRGB };
+
+    // Update sliders based on current mode
+    if (currentMode === 'rgb') {
+        redSlider.value = stopRGB.r;
+        greenSlider.value = stopRGB.g;
+        blueSlider.value = stopRGB.b;
+        redValue.textContent = stopRGB.r;
+        greenValue.textContent = stopRGB.g;
+        blueValue.textContent = stopRGB.b;
+    } else if (currentMode === 'hsv') {
+        syncRGBtoHSV();
+    } else if (currentMode === 'cmyk') {
+        syncRGBtoCMYK();
+    }
+
+    colorCode.textContent = rgbToHex(stopRGB.r, stopRGB.g, stopRGB.b);
+}
+
+/**
+ * Syncs sliders to current RGB (used when switching back to flat mode)
+ */
+function syncSlidersToRGB() {
+    if (currentMode === 'rgb') {
+        redSlider.value = currentRGB.r;
+        greenSlider.value = currentRGB.g;
+        blueSlider.value = currentRGB.b;
+        redValue.textContent = currentRGB.r;
+        greenValue.textContent = currentRGB.g;
+        blueValue.textContent = currentRGB.b;
+    } else if (currentMode === 'hsv') {
+        syncRGBtoHSV();
+    } else if (currentMode === 'cmyk') {
+        syncRGBtoCMYK();
+    }
 }
 
 /**
@@ -189,6 +324,22 @@ function initBackgroundController() {
             if (!target) {
                 switchMode(mode);
             }
+        });
+    });
+
+    // Background type switching (Flat/Gradient)
+    const bgTypeButtons = document.querySelectorAll('.bg-type-btn');
+    bgTypeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            switchBackgroundType(btn.dataset.bgType);
+        });
+    });
+
+    // Gradient stop switching (Stop 1/Stop 2)
+    const gradientStopButtons = document.querySelectorAll('.gradient-stop-btn');
+    gradientStopButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            switchGradientStop(parseInt(btn.dataset.stop));
         });
     });
 

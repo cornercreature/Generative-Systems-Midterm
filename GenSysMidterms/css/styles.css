@@ -413,6 +413,63 @@ input[type="range"]::-moz-range-thumb {
     color: #333;
 }
 
+.background-type-selector {
+    display: flex;
+    gap: 8px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.bg-type-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.bg-type-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.bg-type-btn.active {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-stop-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.gradient-stop-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.gradient-stop-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.gradient-stop-btn.active {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 .circle {
     position: fixed;
     width: 600px;
