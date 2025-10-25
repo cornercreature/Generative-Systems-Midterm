@@ -75,13 +75,12 @@ body {
     top: 0;
     height: 100vh;
     width: 318px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
+    background: white;
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-right: 3px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid black;
 }
 
 .circle-controls {
@@ -90,8 +89,7 @@ body {
     top: 0;
     height: 100vh;
     width: 318px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
+    background: white;
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
@@ -99,7 +97,7 @@ body {
     gap: 10px;
     z-index: 5;
     overflow-y: auto;
-    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    border-left: 1px solid black;
 }
 
 .color-control-section,
@@ -183,7 +181,7 @@ body {
     font-family: 'Lineal', Arial, sans-serif;
     font-size: 24px;
     font-weight: 100;
-    color: #333;
+    color: black;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -201,9 +199,9 @@ body {
 }
 
 .collapsible-header:hover {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1),
-                 0 0 15px rgba(255, 255, 255, 1),
-                 0 0 20px rgba(255, 255, 255, 1);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
+                 0 0 15px rgba(0, 0, 0, 0.2),
+                 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .collapse-icon {
@@ -241,9 +239,9 @@ body {
 .circle-target-btn {
     flex: 1;
     padding: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.3);
-    color: #333;
+    border: 1px solid black;
+    background: white;
+    color: black;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -257,14 +255,14 @@ body {
 }
 
 .circle-target-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .circle-target-btn.active {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 1);
+    background: white;
+    border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -277,9 +275,9 @@ body {
 .blur-target-btn {
     flex: 1;
     padding: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.3);
-    color: #333;
+    border: 1px solid black;
+    background: white;
+    color: black;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -293,14 +291,14 @@ body {
 }
 
 .blur-target-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .blur-target-btn.active {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 1);
+    background: white;
+    border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -353,9 +351,9 @@ body {
 .mode-btn {
     flex: 1;
     padding: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.3);
-    color: #333;
+    border: 1px solid black;
+    background: white;
+    color: black;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -369,14 +367,14 @@ body {
 }
 
 .mode-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .mode-btn.active {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 1);
+    background: white;
+    border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -402,7 +400,7 @@ label {
     font-weight: 100;
     font-size: 14px;
     margin-bottom: 8px;
-    color: #333;
+    color: black;
 }
 
 .slider-container {
@@ -418,6 +416,7 @@ input[type="range"] {
     outline: none;
     -webkit-appearance: none;
     min-width: 200px;
+    border: 0.5px solid black;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -488,7 +487,7 @@ input[type="range"]::-moz-range-thumb {
     font-weight: 100;
     min-width: 40px;
     text-align: right;
-    color: #333;
+    color: black;
 }
 
 .color-code {
@@ -498,7 +497,7 @@ input[type="range"]::-moz-range-thumb {
     font-family: 'Lineal', 'Courier New', monospace;
     font-size: 18px;
     font-weight: 100;
-    color: #333;
+    color: black;
 }
 
 .background-type-selector {
@@ -511,9 +510,9 @@ input[type="range"]::-moz-range-thumb {
 .bg-type-btn {
     flex: 1;
     padding: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.3);
-    color: #333;
+    border: 1px solid black;
+    background: white;
+    color: black;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -527,14 +526,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .bg-type-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .bg-type-btn.active {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 1);
+    background: white;
+    border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -547,9 +546,9 @@ input[type="range"]::-moz-range-thumb {
 .gradient-stop-btn {
     flex: 1;
     padding: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.3);
-    color: #333;
+    border: 1px solid black;
+    background: white;
+    color: black;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -563,14 +562,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .gradient-stop-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .gradient-stop-btn.active {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 1);
+    background: white;
+    border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 

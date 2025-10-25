@@ -256,7 +256,7 @@
     padding: 0;
     border: none;
     background: transparent;
-    color: #333;
+    color: black;
     font-family: 'Lineal', Arial, sans-serif;
     font-weight: 100;
     font-size: 24px;
@@ -269,9 +269,9 @@
 .generate-report-btn:hover {
     background: transparent;
     border: none;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1),
-                 0 0 15px rgba(255, 255, 255, 1),
-                 0 0 20px rgba(255, 255, 255, 1);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
+                 0 0 15px rgba(0, 0, 0, 0.2),
+                 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Design */
