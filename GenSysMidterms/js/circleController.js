@@ -3,7 +3,7 @@
 // ============================================
 
 // Circle color variables
-let currentCircleMode = 'rgb';
+let currentCircleMode = 'hsv';
 let currentCircleTarget = 1; // 1, 2, or 3
 let currentCircleRGB = { r: 199, g: 113, b: 56 }; // #C77138
 let currentCircleTwoRGB = { r: 155, g: 221, b: 243 }; // #9BDDF3

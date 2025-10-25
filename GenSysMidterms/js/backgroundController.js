@@ -30,7 +30,7 @@ const blackValue = document.getElementById('blackValue');
 
 const colorCode = document.getElementById('colorCode');
 
-let currentMode = 'rgb';
+let currentMode = 'hsv';
 let currentRGB = { r: 255, g: 249, b: 154 };
 
 // Gradient mode variables

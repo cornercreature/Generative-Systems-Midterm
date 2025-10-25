@@ -38,14 +38,14 @@
         <div class="collapsible-content" id="colorContent">
 
         <div class="mode-selector">
-            <button class="mode-btn active" data-mode="rgb" data-target="circle">RGB</button>
-            <button class="mode-btn" data-mode="hsv" data-target="circle">HSV</button>
+            <button class="mode-btn" data-mode="rgb" data-target="circle">RGB</button>
+            <button class="mode-btn active" data-mode="hsv" data-target="circle">HSV</button>
             <button class="mode-btn" data-mode="cmyk" data-target="circle">CMYK</button>
         </div>
 
         <!-- Circle target is now controlled by clicking controller circles -->
 
-    <div id="circleRgbMode" class="color-mode active">
+    <div id="circleRgbMode" class="color-mode">
         <div class="slider-group">
             <label for="circleRedSlider">Red</label>
             <div class="slider-container">
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div id="circleHsvMode" class="color-mode">
+    <div id="circleHsvMode" class="color-mode active">
         <div class="slider-group">
             <label for="circleHueSlider">Hue</label>
             <div class="slider-container">
@@ -166,12 +166,12 @@
 <div class="circle" id="circleThree"></div>
     <div class="controls">
         <div class="mode-selector">
-            <button class="mode-btn active" data-mode="rgb">RGB</button>
-            <button class="mode-btn" data-mode="hsv">HSV</button>
+            <button class="mode-btn" data-mode="rgb">RGB</button>
+            <button class="mode-btn active" data-mode="hsv">HSV</button>
             <button class="mode-btn" data-mode="cmyk">CMYK</button>
         </div>
 
-        <div id="rgbMode" class="color-mode active">
+        <div id="rgbMode" class="color-mode">
             <div class="slider-group">
                 <label for="redSlider">Red</label>
                 <div class="slider-container">
@@ -197,7 +197,7 @@
             </div>
         </div>
 
-        <div id="hsvMode" class="color-mode">
+        <div id="hsvMode" class="color-mode active">
             <div class="slider-group">
                 <label for="hueSlider">Hue</label>
                 <div class="slider-container">
