@@ -24,10 +24,10 @@ let controllerOneSize = 200;
 let controllerTwoSize = 150;
 let controllerThreeSize = 50;
 
-// Circle sizes
+// Circle sizes (4:3:1 ratio matching controller circles)
 let circleSize = 600;
-let circleTwoSize = 350;
-let circleThreeSize = 110;
+let circleTwoSize = 450;  // 75% of circleSize
+let circleThreeSize = 150; // 25% of circleSize
 
 // Controller positions (relative to controllerOne's center)
 let controllerTwoOffsetX = 0;
@@ -99,6 +99,7 @@ function initCircleInteraction() {
             } else {
                 // Start dragging
                 isDraggingControllerTwo = true;
+                // Calculate offset from circle center for smooth dragging
                 const rect = circleTwoController.getBoundingClientRect();
                 dragOffsetX = e.clientX - (rect.left + rect.width / 2);
                 dragOffsetY = e.clientY - (rect.top + rect.height / 2);
@@ -121,6 +122,7 @@ function initCircleInteraction() {
         } else {
             // Start dragging
             isDraggingControllerThree = true;
+            // Calculate offset from circle center for smooth dragging
             const rect = circleThreeController.getBoundingClientRect();
             dragOffsetX = e.clientX - (rect.left + rect.width / 2);
             dragOffsetY = e.clientY - (rect.top + rect.height / 2);
@@ -145,7 +147,8 @@ function initCircleInteraction() {
     // Mouse move for dragging controllers
     document.addEventListener('mousemove', (e) => {
         if (isDraggingControllerTwo) {
-            const containerRect = circleOneController.getBoundingClientRect();
+            // Get the main container center (not circleOne, since they're now siblings)
+            const containerRect = document.querySelector('.circle-controller-container').getBoundingClientRect();
             const containerCenterX = containerRect.left + containerRect.width / 2;
             const containerCenterY = containerRect.top + containerRect.height / 2;
 
@@ -174,12 +177,19 @@ function initCircleInteraction() {
             circleTwoController.style.left = `calc(50% + ${offsetX}px)`;
             circleTwoController.style.top = `calc(50% + ${offsetY}px)`;
 
+            // Update circle three's absolute position to maintain relative offset to circle two
+            const circleThreeAbsoluteX = offsetX + controllerThreeOffsetX;
+            const circleThreeAbsoluteY = offsetY + controllerThreeOffsetY;
+            circleThreeController.style.left = `calc(50% + ${circleThreeAbsoluteX}px)`;
+            circleThreeController.style.top = `calc(50% + ${circleThreeAbsoluteY}px)`;
+
             // Update center circles
             updateCirclesFromController();
         }
 
         if (isDraggingControllerThree) {
-            const containerRect = circleTwoController.getBoundingClientRect();
+            // Get the main container center (since all circles are now siblings)
+            const containerRect = document.querySelector('.circle-controller-container').getBoundingClientRect();
             const containerCenterX = containerRect.left + containerRect.width / 2;
             const containerCenterY = containerRect.top + containerRect.height / 2;
 
@@ -187,26 +197,40 @@ function initCircleInteraction() {
             let newX = e.clientX - dragOffsetX;
             let newY = e.clientY - dragOffsetY;
 
-            // Calculate offset from circleTwoController center
+            // Calculate offset from container center
             let offsetX = newX - containerCenterX;
             let offsetY = newY - containerCenterY;
 
+            // Calculate the absolute position of circle three based on circle two's position
+            // Circle three should be constrained relative to circle two's current position
+            const circleTwoAbsoluteX = controllerTwoOffsetX;
+            const circleTwoAbsoluteY = controllerTwoOffsetY;
+
+            // Calculate relative offset from circle two
+            let relativeX = offsetX - circleTwoAbsoluteX;
+            let relativeY = offsetY - circleTwoAbsoluteY;
+
             // Constrain within circleTwoController bounds
             const maxDistance = (controllerTwoSize / 2) - (controllerThreeSize / 2) - 5;
-            const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+            const distance = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
 
             if (distance > maxDistance) {
-                const angle = Math.atan2(offsetY, offsetX);
-                offsetX = Math.cos(angle) * maxDistance;
-                offsetY = Math.sin(angle) * maxDistance;
+                const angle = Math.atan2(relativeY, relativeX);
+                relativeX = Math.cos(angle) * maxDistance;
+                relativeY = Math.sin(angle) * maxDistance;
             }
 
-            controllerThreeOffsetX = offsetX;
-            controllerThreeOffsetY = offsetY;
+            // Store the relative offset
+            controllerThreeOffsetX = relativeX;
+            controllerThreeOffsetY = relativeY;
+
+            // Calculate absolute position for rendering
+            const absoluteX = circleTwoAbsoluteX + relativeX;
+            const absoluteY = circleTwoAbsoluteY + relativeY;
 
             // Update visual position
-            circleThreeController.style.left = `calc(50% + ${offsetX}px)`;
-            circleThreeController.style.top = `calc(50% + ${offsetY}px)`;
+            circleThreeController.style.left = `calc(50% + ${absoluteX}px)`;
+            circleThreeController.style.top = `calc(50% + ${absoluteY}px)`;
 
             // Update center circles
             updateCirclesFromController();
@@ -260,7 +284,7 @@ function initCircleInteraction() {
 
             const scaleChange = controllerTwoSize / oldSize;
             circleTwoSize = Math.round(circleTwoSize * scaleChange);
-            circleTwoSize = Math.max(120, Math.min(circleSize + 50, circleTwoSize));
+            circleTwoSize = Math.max(120, Math.min(circleSize - 60, circleTwoSize));
 
             // Ensure nested controller doesn't exceed parent
             if (controllerThreeSize > controllerTwoSize - 20) {
@@ -279,11 +303,11 @@ function initCircleInteraction() {
             // Resize controller three and circle three proportionally
             const oldSize = controllerThreeSize;
             controllerThreeSize -= scrollAmount;
-            controllerThreeSize = Math.max(30, Math.min(controllerTwoSize - 20, controllerThreeSize));
+            controllerThreeSize = Math.max(15, Math.min(controllerTwoSize - 20, controllerThreeSize));
 
             const scaleChange = controllerThreeSize / oldSize;
             circleThreeSize = Math.round(circleThreeSize * scaleChange);
-            circleThreeSize = Math.max(110, Math.min(circleTwoSize, circleThreeSize));
+            circleThreeSize = Math.max(55, Math.min(circleTwoSize - 60, circleThreeSize));
 
             circleThreeController.style.width = controllerThreeSize + 'px';
             circleThreeController.style.height = controllerThreeSize + 'px';

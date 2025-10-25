@@ -68,13 +68,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* All controller circles now positioned relative to this container */
 }
 
 .controller-circle {
     position: absolute;
     border-radius: 50%;
     cursor: pointer;
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease, top 0.08s ease-out, left 0.08s ease-out, width 0.1s ease-out, height 0.1s ease-out;
     border: 1px solid black;
     background: white;
 }
@@ -425,6 +426,8 @@ input[type="range"]::-moz-range-thumb {
     z-index: 10;
     overflow: hidden;
     pointer-events: none;
+    transition: width 0.1s ease-out, height 0.1s ease-out;
+    /* Maintains 4:3:1 ratio with other circles */
 }
 
 .circle.dragging {
@@ -434,14 +437,16 @@ input[type="range"]::-moz-range-thumb {
 
 #circleTwo {
     background: black;
-    width: 350px;
-    height: 350px;
+    width: 450px;
+    height: 450px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
     cursor: default;
+    transition: top 0.08s ease-out, left 0.08s ease-out, width 0.1s ease-out, height 0.1s ease-out;
+    /* 75% of Circle 1 (600px) = 450px - maintains 4:3:1 ratio */
 }
 
 #circleTwo.dragging {
@@ -450,8 +455,8 @@ input[type="range"]::-moz-range-thumb {
 
 #circleThree {
     background: white;
-    width: 110px;
-    height: 110px;
+    width: 150px;
+    height: 150px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -459,6 +464,8 @@ input[type="range"]::-moz-range-thumb {
     pointer-events: none;
     cursor: default;
     z-index: 11;
+    transition: top 0.08s ease-out, left 0.08s ease-out, width 0.1s ease-out, height 0.1s ease-out;
+    /* 25% of Circle 1 (600px) = 150px - maintains 4:3:1 ratio */
 }
 
 #circleThree.dragging {
