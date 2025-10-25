@@ -120,6 +120,55 @@ function updateFromCMYK() {
 }
 
 /**
+ * Calculates perceived brightness of a color (0-255)
+ * Uses standard luminance formula
+ * @param {number} r - Red (0-255)
+ * @param {number} g - Green (0-255)
+ * @param {number} b - Blue (0-255)
+ * @returns {number} Brightness value (0-255)
+ */
+function calculateBrightness(r, g, b) {
+    // Using relative luminance formula
+    return (0.299 * r + 0.587 * g + 0.114 * b);
+}
+
+/**
+ * Updates column colors based on background brightness
+ * Light backgrounds → dark blue columns with dark text
+ * Dark backgrounds → white columns with white text
+ */
+function updateColumnColors(rgb) {
+    const brightness = calculateBrightness(rgb.r, rgb.g, rgb.b);
+    const leftColumn = document.querySelector('.controls');
+    const rightColumn = document.querySelector('.circle-controls');
+
+    // Threshold at 128 (middle of 0-255 range)
+    if (brightness > 128) {
+        // Light background → dark blue columns with dark text
+        leftColumn.style.background = 'rgba(20, 40, 80, 0.08)';
+        leftColumn.style.borderRight = '3px solid rgba(20, 40, 80, 0.3)';
+        rightColumn.style.background = 'rgba(20, 40, 80, 0.08)';
+        rightColumn.style.borderLeft = '3px solid rgba(20, 40, 80, 0.3)';
+
+        // Update all text elements to dark
+        document.querySelectorAll('.controls *, .circle-controls *').forEach(el => {
+            el.style.color = '#333';
+        });
+    } else {
+        // Dark background → white columns with white text
+        leftColumn.style.background = 'rgba(255, 255, 255, 0.08)';
+        leftColumn.style.borderRight = '3px solid rgba(255, 255, 255, 0.3)';
+        rightColumn.style.background = 'rgba(255, 255, 255, 0.08)';
+        rightColumn.style.borderLeft = '3px solid rgba(255, 255, 255, 0.3)';
+
+        // Update all text elements to white
+        document.querySelectorAll('.controls *, .circle-controls *').forEach(el => {
+            el.style.color = '#fff';
+        });
+    }
+}
+
+/**
  * Updates the background color and displays hex code
  * @param {number} r - Red (0-255)
  * @param {number} g - Green (0-255)
@@ -135,10 +184,14 @@ function updateBackground(r, g, b) {
         }
         // Apply gradient
         applyGradient();
+        // Update columns based on stop 1 (primary color)
+        updateColumnColors(gradientStop1RGB);
     } else {
         // Flat color mode
         document.body.style.background = `rgb(${r}, ${g}, ${b})`;
         colorCode.textContent = rgbToHex(r, g, b);
+        // Update column colors based on background
+        updateColumnColors({ r, g, b });
     }
 }
 
