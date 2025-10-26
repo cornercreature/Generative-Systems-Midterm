@@ -44,13 +44,25 @@ function closeReportModal() {
 function downloadModalAsPNG() {
     const modalContent = document.querySelector('.modal-content');
 
+    // Temporarily remove max-height and overflow to capture full content
+    const originalMaxHeight = modalContent.style.maxHeight;
+    const originalOverflow = modalContent.style.overflow;
+    modalContent.style.maxHeight = 'none';
+    modalContent.style.overflow = 'visible';
+
     // Use html2canvas to capture the modal content
     html2canvas(modalContent, {
         backgroundColor: '#ffffff',
         scale: 2, // Higher quality
         logging: false,
-        useCORS: true
+        useCORS: true,
+        windowHeight: modalContent.scrollHeight,
+        height: modalContent.scrollHeight
     }).then(canvas => {
+        // Restore original styles
+        modalContent.style.maxHeight = originalMaxHeight;
+        modalContent.style.overflow = originalOverflow;
+
         // Convert canvas to blob
         canvas.toBlob(blob => {
             // Create download link
@@ -68,6 +80,10 @@ function downloadModalAsPNG() {
             URL.revokeObjectURL(url);
         });
     }).catch(error => {
+        // Restore original styles on error
+        modalContent.style.maxHeight = originalMaxHeight;
+        modalContent.style.overflow = originalOverflow;
+
         console.error('Error generating PNG:', error);
         alert('Error downloading report. Please try again.');
     });
