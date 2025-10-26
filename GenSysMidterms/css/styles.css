@@ -69,6 +69,60 @@ body {
     transition: background-color 0.1s ease;
 }
 
+/* Info Header */
+.info-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 318px;
+    background: white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    z-index: 10;
+    transition: height 0.3s ease;
+}
+
+/* Triangle Toggle Button */
+.info-toggle-btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border: none;
+    border-left: 30px solid black;
+    border-bottom: 30px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Info Content */
+.info-content {
+    padding: 30px;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.info-header.collapsed .info-content {
+    max-height: 0;
+    padding: 0 30px;
+}
+
+.info-content p {
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+    line-height: 1.6;
+    color: black;
+    margin: 0 0 15px 0;
+}
+
+.info-content p:last-child {
+    margin-bottom: 0;
+}
+
 .controls {
     position: fixed;
     left: 0;
@@ -76,12 +130,17 @@ body {
     height: 100vh;
     width: 318px;
     background: white;
-    padding: 40px 30px;
+    padding: 250px 30px 40px 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: auto;
     border-right: 1px solid black;
+    transition: padding-top 0.3s ease;
+}
+
+.info-header.collapsed ~ .controls {
+    padding-top: 50px;
 }
 
 .circle-controls {
@@ -91,7 +150,7 @@ body {
     height: 100vh;
     width: 318px;
     background: white;
-    padding: 40px 30px;
+    padding: 50px 30px 40px 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
