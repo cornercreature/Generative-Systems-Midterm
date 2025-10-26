@@ -67,10 +67,15 @@ function drawWaveformStatic(ctx, canvas, colorData) {
         const frequency = audioInfo[3 - index].frequency;
         const amplitude = height / 8;
 
-        // Draw waveform
+        // Draw waveform with glow effect
         ctx.strokeStyle = hex;
-        ctx.lineWidth = 2;
-        ctx.globalAlpha = 0.7;
+        ctx.lineWidth = 5;
+        ctx.globalAlpha = 1;
+
+        // Add subtle glow
+        ctx.shadowColor = hex;
+        ctx.shadowBlur = 8;
+
         ctx.beginPath();
 
         for (let x = 0; x < width; x++) {
@@ -85,6 +90,9 @@ function drawWaveformStatic(ctx, canvas, colorData) {
         }
 
         ctx.stroke();
+
+        // Reset shadow
+        ctx.shadowBlur = 0;
     });
 
     ctx.globalAlpha = 1;
@@ -146,10 +154,15 @@ function animateWaveform(colorData) {
 
             const amplitude = baseAmplitude * amplitudeMultiplier * (1 - index * 0.15);
 
-            // Draw waveform
+            // Draw waveform with enhanced glow
             ctx.strokeStyle = hex;
-            ctx.lineWidth = 3;
-            ctx.globalAlpha = 0.8;
+            ctx.lineWidth = 6;
+            ctx.globalAlpha = 1;
+
+            // Add animated glow effect
+            ctx.shadowColor = hex;
+            ctx.shadowBlur = 12;
+
             ctx.beginPath();
 
             for (let x = 0; x < width; x++) {
@@ -165,6 +178,9 @@ function animateWaveform(colorData) {
             }
 
             ctx.stroke();
+
+            // Reset shadow
+            ctx.shadowBlur = 0;
         });
 
         ctx.globalAlpha = 1;
