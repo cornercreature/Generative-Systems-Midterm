@@ -206,7 +206,7 @@ async function displayPoem(colorData) {
 
     console.log('Poem container found, setting loading state...');
     // Show loading state
-    poemContainer.innerHTML = '<p class="poem-loading">Generating poetic interpretation...</p>';
+    poemContainer.innerHTML = '<p class="poem-loading">interpreting...</p>';
 
     try {
         console.log('Calling generatePoem...');
