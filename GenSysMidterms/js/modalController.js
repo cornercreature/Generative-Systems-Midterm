@@ -112,16 +112,17 @@ function generateReportData() {
 function populateReportModal(colorData) {
     // Define color items to populate
     const colorItems = [
-        { id: 'backgroundInfo', color: colorData.background, name: 'Background' },
-        { id: 'circle1Info', color: colorData.circle1, name: 'Circle 1' },
-        { id: 'circle2Info', color: colorData.circle2, name: 'Circle 2' },
-        { id: 'circle3Info', color: colorData.circle3, name: 'Circle 3' }
+        { id: 'backgroundInfo', swatchId: 'backgroundSwatch', color: colorData.background, name: 'Background' },
+        { id: 'circle1Info', swatchId: 'circle1Swatch', color: colorData.circle1, name: 'Circle 1' },
+        { id: 'circle2Info', swatchId: 'circle2Swatch', color: colorData.circle2, name: 'Circle 2' },
+        { id: 'circle3Info', swatchId: 'circle3Swatch', color: colorData.circle3, name: 'Circle 3' }
     ];
 
     // Populate each color info section
     colorItems.forEach(item => {
         const element = document.getElementById(item.id);
         const valuesDiv = element.querySelector('.color-values');
+        const swatchDiv = document.getElementById(item.swatchId);
 
         const { r, g, b } = item.color;
 
@@ -129,6 +130,9 @@ function populateReportModal(colorData) {
         const hex = rgbToHex(r, g, b);
         const hsv = rgbToHsv(r, g, b);
         const cmyk = rgbToCmyk(r, g, b);
+
+        // Set the color swatch background
+        swatchDiv.style.backgroundColor = hex;
 
         // Build HTML for color values
         valuesDiv.innerHTML = `

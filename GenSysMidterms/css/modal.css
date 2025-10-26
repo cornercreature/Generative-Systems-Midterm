@@ -148,6 +148,15 @@
     font-size: 16px;
 }
 
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+}
+
 .color-values {
     color: black;
     font-family: 'Lineal', Arial, sans-serif;
