@@ -110,15 +110,14 @@ function generateReportData() {
  * @param {Object} colorData - Color data object
  */
 function populateReportModal(colorData) {
-    // Define color items to populate
+    // Define color items to populate (non-background items)
     const colorItems = [
-        { id: 'backgroundInfo', swatchId: 'backgroundSwatch', color: colorData.background, name: 'Background' },
         { id: 'circle1Info', swatchId: 'circle1Swatch', color: colorData.circle1, name: 'Circle 1' },
         { id: 'circle2Info', swatchId: 'circle2Swatch', color: colorData.circle2, name: 'Circle 2' },
         { id: 'circle3Info', swatchId: 'circle3Swatch', color: colorData.circle3, name: 'Circle 3' }
     ];
 
-    // Populate each color info section
+    // Populate circle color info sections
     colorItems.forEach(item => {
         const element = document.getElementById(item.id);
         const valuesDiv = element.querySelector('.color-values');
@@ -143,7 +142,70 @@ function populateReportModal(colorData) {
         `;
     });
 
-    // Set background color swatch
+    // Handle background info specially (gradient vs flat)
+    const backgroundElement = document.getElementById('backgroundInfo');
+    const backgroundValuesDiv = backgroundElement.querySelector('.color-values');
+    const backgroundSwatchDiv = document.getElementById('backgroundSwatch');
+
+    if (colorData.backgroundState.type === 'gradient') {
+        // Gradient background - show both stops
+        const stop1 = colorData.backgroundState.stop1;
+        const stop2 = colorData.backgroundState.stop2;
+
+        // Convert stop1
+        const hex1 = rgbToHex(stop1.r, stop1.g, stop1.b);
+        const hsv1 = rgbToHsv(stop1.r, stop1.g, stop1.b);
+        const cmyk1 = rgbToCmyk(stop1.r, stop1.g, stop1.b);
+
+        // Convert stop2
+        const hex2 = rgbToHex(stop2.r, stop2.g, stop2.b);
+        const hsv2 = rgbToHsv(stop2.r, stop2.g, stop2.b);
+        const cmyk2 = rgbToCmyk(stop2.r, stop2.g, stop2.b);
+
+        // Hide the main swatch for gradient backgrounds
+        backgroundSwatchDiv.style.display = 'none';
+
+        // Build HTML for both gradient stops with mini swatches
+        backgroundValuesDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <div style="width: 16px; height: 16px; border-radius: 50%; background-color: ${hex1}; border: 1px solid black; flex-shrink: 0;"></div>
+                <div style="text-align: left;">
+                    <div>RGB: ${stop1.r}, ${stop1.g}, ${stop1.b}</div>
+                    <div>CMYK: ${cmyk1.c}%, ${cmyk1.m}%, ${cmyk1.y}%, ${cmyk1.k}%</div>
+                    <div>HSV: ${hsv1.h}°, ${hsv1.s}%, ${hsv1.v}%</div>
+                    <div>HEX: ${hex1}</div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+                <div style="width: 16px; height: 16px; border-radius: 50%; background-color: ${hex2}; border: 1px solid black; flex-shrink: 0;"></div>
+                <div style="text-align: left;">
+                    <div>RGB: ${stop2.r}, ${stop2.g}, ${stop2.b}</div>
+                    <div>CMYK: ${cmyk2.c}%, ${cmyk2.m}%, ${cmyk2.y}%, ${cmyk2.k}%</div>
+                    <div>HSV: ${hsv2.h}°, ${hsv2.s}%, ${hsv2.v}%</div>
+                    <div>HEX: ${hex2}</div>
+                </div>
+            </div>
+        `;
+    } else {
+        // Flat background - show single color
+        const { r, g, b } = colorData.background;
+        const hex = rgbToHex(r, g, b);
+        const hsv = rgbToHsv(r, g, b);
+        const cmyk = rgbToCmyk(r, g, b);
+
+        // Show the main swatch for flat backgrounds
+        backgroundSwatchDiv.style.display = 'block';
+        backgroundSwatchDiv.style.backgroundColor = hex;
+
+        backgroundValuesDiv.innerHTML = `
+            <div>RGB: ${r}, ${g}, ${b}</div>
+            <div>CMYK: ${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%</div>
+            <div>HSV: ${hsv.h}°, ${hsv.s}%, ${hsv.v}%</div>
+            <div>HEX: ${hex}</div>
+        `;
+    }
+
+    // Set background color swatch in preview
     const backgroundSwatch = document.getElementById('previewBackgroundSwatch');
     const bgColor = colorData.background;
     backgroundSwatch.style.backgroundColor = rgbToHex(bgColor.r, bgColor.g, bgColor.b);
