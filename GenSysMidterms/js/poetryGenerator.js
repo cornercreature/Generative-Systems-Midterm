@@ -119,12 +119,29 @@ ${colorDescriptions}
 
 ${toneInstructions}
 
-Create a concrete poem (10-15 lines) that captures the emotional and aesthetic essence of this palette. The poem should:
-1. Use spacing, line breaks, and visual arrangement to create meaning
-2. Reflect the colors' emotional resonance without directly naming them
-3. Match the specified tone and intensity
-4. Be formatted with intentional spacing and line breaks for visual impact
-5. Work as both text and visual composition
+Create a concrete poem (20-30 lines) that captures the emotional and aesthetic essence of this palette. The poem should:
+1. Form GEOMETRIC SHAPES with the text - circles, triangles, waves, spirals, diamonds, or abstract forms
+2. Use extreme horizontal spacing - words should be spread dramatically across the full width (80-120 characters wide)
+3. Create visual movement through shape - the text should flow, expand, contract, or radiate
+4. Let the shape reflect the emotional content - angular shapes for intensity, curves for softness, scattered for chaos
+5. Reflect the colors' emotional resonance without directly naming them
+6. Match the specified tone and intensity
+7. Think sculptural and architectural - build the poem as a visual monument
+
+CRITICAL FORMATTING INSTRUCTIONS:
+- Use 50-100+ spaces between words to create wide, expansive layouts
+- Build recognizable shapes: start narrow, expand wide, contract again (like a diamond)
+- Or create waves, spirals, cascades using strategic indentation and spacing
+- Each line can be dramatically different in width and position
+- Think of the page as a canvas - use the FULL horizontal and vertical space
+
+Example shape concepts:
+- Expanding/contracting (diamond, hourglass)
+- Circular/spiral patterns
+- Wave forms (crescendo and decrescendo)
+- Diagonal cascades or staircases
+- Radiating outward from center
+- Asymmetric, organic forms
 
 Return ONLY the poem with its visual formatting (using spaces and line breaks). No explanations, titles, or metadata.`;
 }

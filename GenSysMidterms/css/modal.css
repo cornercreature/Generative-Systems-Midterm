@@ -178,6 +178,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: left;
+    overflow-x: auto;
 }
 
 /* Poem Text Styling */
@@ -187,10 +189,12 @@
     font-weight: 100;
     font-size: 16px;
     line-height: 1.8;
-    white-space: pre-wrap;
-    text-align: left;
+    white-space: pre;
+    text-align: center;
     margin: 0;
     padding: 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Poem Loading State */
@@ -213,19 +217,20 @@
 }
 
 .chime-section {
-    min-height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    padding: 30px;
+    padding: 0;
+    margin-bottom: 20px;
+    border: none;
+    background: transparent;
 }
 
 /* Chime Canvas */
 #chimeCanvas {
     width: 100%;
-    max-width: 800px;
     height: 200px;
     border: 1px solid black;
     cursor: pointer;
