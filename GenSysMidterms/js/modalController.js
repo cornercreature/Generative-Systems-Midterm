@@ -43,12 +43,20 @@ function closeReportModal() {
  */
 function downloadModalAsPNG() {
     const modalContent = document.querySelector('.modal-content');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const modalActions = document.querySelector('.modal-actions');
 
     // Temporarily remove max-height and overflow to capture full content
     const originalMaxHeight = modalContent.style.maxHeight;
     const originalOverflow = modalContent.style.overflow;
     modalContent.style.maxHeight = 'none';
     modalContent.style.overflow = 'visible';
+
+    // Hide buttons before capture
+    const originalCloseBtnDisplay = closeBtn.style.display;
+    const originalModalActionsDisplay = modalActions.style.display;
+    closeBtn.style.display = 'none';
+    modalActions.style.display = 'none';
 
     // Use html2canvas to capture the modal content
     html2canvas(modalContent, {
@@ -62,6 +70,8 @@ function downloadModalAsPNG() {
         // Restore original styles
         modalContent.style.maxHeight = originalMaxHeight;
         modalContent.style.overflow = originalOverflow;
+        closeBtn.style.display = originalCloseBtnDisplay;
+        modalActions.style.display = originalModalActionsDisplay;
 
         // Convert canvas to blob
         canvas.toBlob(blob => {
@@ -83,6 +93,8 @@ function downloadModalAsPNG() {
         // Restore original styles on error
         modalContent.style.maxHeight = originalMaxHeight;
         modalContent.style.overflow = originalOverflow;
+        closeBtn.style.display = originalCloseBtnDisplay;
+        modalActions.style.display = originalModalActionsDisplay;
 
         console.error('Error generating PNG:', error);
         alert('Error downloading report. Please try again.');
