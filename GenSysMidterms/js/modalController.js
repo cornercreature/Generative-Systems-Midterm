@@ -47,7 +47,10 @@ function generateReportData() {
         background: getCurrentBackgroundRGB(),
         circle1: getCurrentCircleColors().circle1,
         circle2: getCurrentCircleColors().circle2,
-        circle3: getCurrentCircleColors().circle3
+        circle3: getCurrentCircleColors().circle3,
+        circleState: getCurrentCircleState(), // Add circle positions and sizes
+        blurState: getCurrentBlurState(), // Add blur values
+        backgroundState: getCurrentBackgroundState() // Add background type and gradient info
     };
 }
 
@@ -102,35 +105,73 @@ function drawCirclePreview(colorData) {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Set background
-    const bgHex = rgbToHex(colorData.background.r, colorData.background.g, colorData.background.b);
-    ctx.fillStyle = bgHex;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Set background (gradient or flat)
+    if (colorData.backgroundState.type === 'gradient') {
+        // Create linear gradient from top to bottom
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        const stop1Hex = rgbToHex(colorData.backgroundState.stop1.r, colorData.backgroundState.stop1.g, colorData.backgroundState.stop1.b);
+        const stop2Hex = rgbToHex(colorData.backgroundState.stop2.r, colorData.backgroundState.stop2.g, colorData.backgroundState.stop2.b);
+        gradient.addColorStop(0, stop1Hex);
+        gradient.addColorStop(1, stop2Hex);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else {
+        // Flat color background
+        const bgHex = rgbToHex(colorData.background.r, colorData.background.g, colorData.background.b);
+        ctx.fillStyle = bgHex;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
-    // Draw circles (scaled down proportionally)
+    // Get circle state for accurate positioning and sizing
+    const state = colorData.circleState;
+
+    // Calculate scale factor to fit largest circle in canvas
+    // Use 80% of canvas for the largest circle to leave padding
+    const maxCanvasSize = Math.min(canvas.width, canvas.height) * 0.8;
+    const scaleFactor = maxCanvasSize / state.sizes.circle1;
+
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
 
-    // Circle 1 (outermost) - scaled to ~60% of canvas
+    // Draw Circle 1 (outermost) at center with actual size scaled down (no blur)
     const circle1Hex = rgbToHex(colorData.circle1.r, colorData.circle1.g, colorData.circle1.b);
     ctx.fillStyle = circle1Hex;
+    ctx.filter = 'none'; // Circle 1 has no blur
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 120, 0, Math.PI * 2);
+    const circle1Radius = (state.sizes.circle1 / 2) * scaleFactor;
+    const circle1X = centerX + (state.positions.circle1.x * scaleFactor);
+    const circle1Y = centerY + (state.positions.circle1.y * scaleFactor);
+    ctx.arc(circle1X, circle1Y, circle1Radius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Circle 2 (middle) - scaled proportionally
+    // Draw Circle 2 with actual position, size, and blur
     const circle2Hex = rgbToHex(colorData.circle2.r, colorData.circle2.g, colorData.circle2.b);
     ctx.fillStyle = circle2Hex;
+    // Apply blur scaled proportionally
+    const circle2BlurScaled = colorData.blurState.circle2Blur * scaleFactor;
+    ctx.filter = `blur(${circle2BlurScaled}px)`;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
+    const circle2Radius = (state.sizes.circle2 / 2) * scaleFactor;
+    const circle2X = centerX + (state.positions.circle2.x * scaleFactor);
+    const circle2Y = centerY + (state.positions.circle2.y * scaleFactor);
+    ctx.arc(circle2X, circle2Y, circle2Radius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Circle 3 (innermost) - scaled proportionally
+    // Draw Circle 3 with actual position, size, and blur
     const circle3Hex = rgbToHex(colorData.circle3.r, colorData.circle3.g, colorData.circle3.b);
     ctx.fillStyle = circle3Hex;
+    // Apply blur scaled proportionally
+    const circle3BlurScaled = colorData.blurState.circle3Blur * scaleFactor;
+    ctx.filter = `blur(${circle3BlurScaled}px)`;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+    const circle3Radius = (state.sizes.circle3 / 2) * scaleFactor;
+    const circle3X = centerX + (state.positions.circle3.x * scaleFactor);
+    const circle3Y = centerY + (state.positions.circle3.y * scaleFactor);
+    ctx.arc(circle3X, circle3Y, circle3Radius, 0, Math.PI * 2);
     ctx.fill();
+
+    // Reset filter
+    ctx.filter = 'none';
 }
 
 /**

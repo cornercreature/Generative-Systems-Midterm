@@ -64,6 +64,31 @@ function updateCirclesFromController() {
 }
 
 /**
+ * Gets current circle positions and sizes for report generation
+ * @returns {Object} Object containing sizes and positions of all circles
+ */
+function getCurrentCircleState() {
+    return {
+        sizes: {
+            circle1: circleSize,
+            circle2: circleTwoSize,
+            circle3: circleThreeSize
+        },
+        positions: {
+            circle1: { x: 0, y: 0 }, // Circle 1 is always centered
+            circle2: {
+                x: controllerTwoOffsetX * (circleSize / controllerOneSize),
+                y: controllerTwoOffsetY * (circleSize / controllerOneSize)
+            },
+            circle3: {
+                x: (controllerTwoOffsetX + controllerThreeOffsetX) * (circleSize / controllerOneSize),
+                y: (controllerTwoOffsetY + controllerThreeOffsetY) * (circleSize / controllerOneSize)
+            }
+        }
+    };
+}
+
+/**
  * Initializes circle interaction controller with event listeners
  */
 function initCircleInteraction() {

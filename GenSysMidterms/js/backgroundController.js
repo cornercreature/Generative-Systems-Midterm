@@ -218,6 +218,25 @@ function getGradientColors() {
 }
 
 /**
+ * Gets current background state (type and colors)
+ * @returns {Object} Background state object with type and color info
+ */
+function getCurrentBackgroundState() {
+    if (backgroundType === 'gradient') {
+        return {
+            type: 'gradient',
+            stop1: gradientStop1RGB,
+            stop2: gradientStop2RGB
+        };
+    } else {
+        return {
+            type: 'flat',
+            color: currentRGB
+        };
+    }
+}
+
+/**
  * Switches between flat and gradient background types
  * @param {string} type - 'flat' or 'gradient'
  */

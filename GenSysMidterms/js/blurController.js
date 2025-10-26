@@ -57,6 +57,17 @@ function updateBlur() {
 }
 
 /**
+ * Gets current blur values for report generation
+ * @returns {Object} Object containing blur values for circles 2 and 3
+ */
+function getCurrentBlurState() {
+    return {
+        circle2Blur: circleTwoBlur,
+        circle3Blur: circleThreeBlur
+    };
+}
+
+/**
  * Initializes blur controller with event listeners
  */
 function initBlurController() {
