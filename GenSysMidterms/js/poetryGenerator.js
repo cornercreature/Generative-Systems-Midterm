@@ -192,13 +192,22 @@ async function generatePoem(colorData) {
  * @param {Object} colorData - Color palette data
  */
 async function displayPoem(colorData) {
+    console.log('displayPoem called with colorData:', colorData);
     const poemContainer = document.querySelector('.poem-section');
 
+    if (!poemContainer) {
+        console.error('Poem container not found!');
+        return;
+    }
+
+    console.log('Poem container found, setting loading state...');
     // Show loading state
     poemContainer.innerHTML = '<p class="poem-loading">Generating poetic interpretation...</p>';
 
     try {
+        console.log('Calling generatePoem...');
         const poem = await generatePoem(colorData);
+        console.log('Poem generated successfully:', poem.substring(0, 50) + '...');
 
         // Display the poem
         poemContainer.innerHTML = `<pre class="poem-text">${poem}</pre>`;
@@ -209,8 +218,10 @@ async function displayPoem(colorData) {
         let errorMessage = 'Unable to generate poem at this time.';
         if (error.message.includes('API request failed')) {
             errorMessage += ' Please check your API connection.';
+        } else if (error.message.includes('Server error')) {
+            errorMessage += ' Server error: ' + error.message;
         }
 
-        poemContainer.innerHTML = `<p class="poem-error">${errorMessage}</p>`;
+        poemContainer.innerHTML = `<p class="poem-error">${errorMessage}<br><small>${error.message}</small></p>`;
     }
 }
