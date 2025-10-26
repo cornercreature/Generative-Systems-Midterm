@@ -127,13 +127,17 @@ Create a concrete poem (20-30 lines) that captures the emotional and aesthetic e
 5. Reflect the colors' emotional resonance without directly naming them
 6. Match the specified tone and intensity
 7. Think sculptural and architectural - build the poem as a visual monument
+8. INTEGRATE UNICODE GLYPHS AND SYMBOLS throughout the poem - use characters like ◆ ● ○ ◉ ◊ ▲ ▼ ◀ ▶ ★ ✦ ✧ ⬡ ⬢ ⬣ ▢ ▣ ▤ ▥ ▦ ▧ ▨ ▩ ◐ ◑ ◒ ◓ ◔ ◕ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ⊕ ⊗ ⊙ ⊚ ⊛ ⊜ ⊝ ⊞ ~ · • ∘ ∙ ○ ◌ ◍ ◎ ● ◐ ◑ and other decorative or geometric symbols
+9. Mix words and glyphs naturally - glyphs can punctuate, frame, or replace words, creating a hybrid visual-textual experience
 
 CRITICAL FORMATTING INSTRUCTIONS:
-- Use 50-100+ spaces between words to create wide, expansive layouts
+- Use 50-100+ spaces between words AND glyphs to create wide, expansive layouts
 - Build recognizable shapes: start narrow, expand wide, contract again (like a diamond)
 - Or create waves, spirals, cascades using strategic indentation and spacing
 - Each line can be dramatically different in width and position
 - Think of the page as a canvas - use the FULL horizontal and vertical space
+- Scatter glyphs strategically to enhance the visual shape and rhythm
+- Let glyphs echo or amplify the emotional tone (e.g., ◆ for sharpness, ○ for softness, ★ for brightness)
 
 Example shape concepts:
 - Expanding/contracting (diamond, hourglass)
