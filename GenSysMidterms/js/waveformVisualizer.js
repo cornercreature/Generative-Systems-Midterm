@@ -29,8 +29,8 @@ function initializeWaveformVisualizer(colorData) {
     canvas.style.cursor = 'pointer';
     canvas.addEventListener('click', replayChime);
 
-    // Show instruction
-    updateChimeInstruction('Click to play chime');
+    // Hide instruction
+    updateChimeInstruction('');
 }
 
 /**
@@ -190,7 +190,7 @@ function animateWaveform(colorData) {
         } else {
             isAnimating = false;
             drawWaveformStatic(ctx, canvas, colorData);
-            updateChimeInstruction('Click to play again');
+            updateChimeInstruction('');
         }
     }
 
@@ -213,7 +213,7 @@ function stopAnimation() {
 function replayChime() {
     if (isAnimating) return; // Don't start if already playing
 
-    updateChimeInstruction('Playing...');
+    updateChimeInstruction('');
 
     // Play audio and animate
     playColorChime(currentColorData, null);
@@ -240,7 +240,7 @@ function playInitialChime(colorData) {
 
     // Small delay before playing
     setTimeout(() => {
-        updateChimeInstruction('Playing...');
+        updateChimeInstruction('');
         playColorChime(colorData, null);
         animateWaveform(colorData);
     }, 500);
