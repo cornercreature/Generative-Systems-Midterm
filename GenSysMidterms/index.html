@@ -16,7 +16,9 @@
             Circle Controller
         </h3>
         <div class="collapsible-content" id="controllerContent">
-        <div class="circle-controller-container">
+        <div class="circle-controller-container" data-tooltip="CLICK a circle to select it
+DRAG to change its position
+SCROLL to change its scale">
             <div class="controller-circle" id="circleOneController"></div>
             <div class="controller-circle" id="circleTwoController"></div>
             <div class="controller-circle" id="circleThreeController"></div>
@@ -30,7 +32,7 @@
         <h3 class="controls-title collapsible-header" data-section="color">
             Circle Color
         </h3>
-        <div class="collapsible-content" id="colorContent">
+        <div class="collapsible-content" id="colorContent" data-tooltip="CONTROL the selected circle's color here">
 
         <div class="mode-selector">
             <button class="mode-btn" data-mode="rgb" data-target="circle">RGB</button>
@@ -136,7 +138,7 @@
         <h3 class="controls-title collapsible-header" data-section="blur">
             Blur
         </h3>
-        <div class="collapsible-content" id="blurContent">
+        <div class="collapsible-content" id="blurContent" data-tooltip="BLUR circles here">
 
         <div class="blur-target-selector">
             <button class="blur-target-btn active" data-blur-circle="2">Midtone</button>
@@ -158,7 +160,7 @@
 <div class="circle" id="circle"></div>
 <div class="circle" id="circleTwo"></div>
 <div class="circle" id="circleThree"></div>
-    <div class="controls">
+    <div class="controls" data-tooltip="ADJUST background color here">
         <h3 class="controls-title">Background Color</h3>
 
         <div class="mode-selector">
@@ -256,7 +258,7 @@
         <div class="color-code" id="colorCode">#FFF700</div>
 
         <!-- Background Type Selector -->
-        <div class="background-type-selector">
+        <div class="background-type-selector" data-tooltip="you have FLAT or GRADIENT options">
             <button class="bg-type-btn active" data-bg-type="flat">Flat</button>
             <button class="bg-type-btn" data-bg-type="gradient">Gradient</button>
         </div>
@@ -338,6 +340,7 @@
     <script src="js/blurController.js"></script>
     <script src="js/uiControls.js"></script>
     <script src="js/randomizer.js"></script>
+    <script src="js/tooltipController.js"></script>
     <script src="js/config/apiConfig.js"></script>
     <script src="js/poetryGenerator.js"></script>
     <script src="js/audioChime.js"></script>
