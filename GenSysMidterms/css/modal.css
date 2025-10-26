@@ -34,15 +34,15 @@
 /* Modal Content Box */
 .modal-content {
     position: relative;
-    background: #f5d5d5;
+    background: white;
     width: 90%;
     max-width: 1200px;
     max-height: 90vh;
     overflow-y: auto;
-    border-radius: 8px;
+    border: 1px solid black;
     padding: 40px;
     z-index: 10001;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px #FFF700;
 }
 
 /* Close Button */
@@ -50,10 +50,12 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: transparent;
-    border: 2px solid white;
-    color: white;
+    background: white;
+    border: 1px solid black;
+    color: black;
     font-size: 32px;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -66,20 +68,20 @@
 }
 
 .modal-close:hover {
-    background: white;
-    color: #f5d5d5;
+    box-shadow: 0 0 10px #FFF700;
     transform: rotate(90deg);
 }
 
 /* Modal Title */
 .modal-title {
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 32px;
-    color: white;
+    color: black;
     margin: 0 0 40px 0;
     padding: 15px;
-    border: 2px solid white;
+    border: 1px solid black;
     background: transparent;
 }
 
@@ -103,14 +105,14 @@
     width: 100%;
     max-width: 400px;
     height: auto;
-    border: 2px solid white;
+    border: 1px solid black;
     background: white;
 }
 
 .preview-swatch {
     width: 200px;
     height: 80px;
-    border: 2px solid white;
+    border: 1px solid black;
 }
 
 /* Right Side: Color Information */
@@ -122,27 +124,29 @@
 
 .color-info-item {
     background: transparent;
-    border: 2px solid white;
+    border: 1px solid black;
     padding: 15px;
 }
 
 .color-info-item h3 {
     margin: 0 0 10px 0;
-    color: white;
-    font-family: 'Arial', sans-serif;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 18px;
 }
 
 .color-values {
-    color: white;
-    font-family: 'Courier New', monospace;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 14px;
     line-height: 1.6;
 }
 
 /* Placeholder Sections */
 .placeholder-section {
-    border: 2px solid white;
+    border: 1px solid black;
     padding: 40px;
     margin-bottom: 20px;
     text-align: center;
@@ -150,8 +154,9 @@
 }
 
 .placeholder-section p {
-    color: white;
-    font-family: 'Arial', sans-serif;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 18px;
     margin: 0;
 }
@@ -165,8 +170,9 @@
 
 /* Poem Text Styling */
 .poem-text {
-    color: white;
-    font-family: 'Courier New', monospace;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 16px;
     line-height: 1.8;
     white-space: pre-wrap;
@@ -177,8 +183,9 @@
 
 /* Poem Loading State */
 .poem-loading {
-    color: rgba(255, 255, 255, 0.7);
-    font-family: 'Arial', sans-serif;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 16px;
     font-style: italic;
     margin: 0;
@@ -186,8 +193,9 @@
 
 /* Poem Error State */
 .poem-error {
-    color: rgba(255, 255, 255, 0.8);
-    font-family: 'Arial', sans-serif;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 14px;
     margin: 0;
 }
@@ -207,19 +215,20 @@
     width: 100%;
     max-width: 800px;
     height: 200px;
-    border: 2px solid white;
+    border: 1px solid black;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 #chimeCanvas:hover {
-    transform: scale(1.02);
+    box-shadow: 0 0 10px #FFF700;
 }
 
 /* Chime Instruction Text */
 .chime-instruction {
-    color: white;
-    font-family: 'Arial', sans-serif;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 14px;
     margin: 0;
     font-style: italic;
@@ -235,18 +244,18 @@
 
 .modal-btn {
     padding: 15px 30px;
-    border: 2px solid white;
-    background: transparent;
-    color: white;
-    font-family: 'Arial', sans-serif;
+    border: 1px solid black;
+    background: white;
+    color: black;
+    font-family: 'Lineal', Arial, sans-serif;
+    font-weight: 100;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .modal-btn:hover {
-    background: white;
-    color: #f5d5d5;
+    box-shadow: 0 0 10px #FFF700;
 }
 
 /* Generate Report Button (on main page) */
@@ -269,9 +278,9 @@
 .generate-report-btn:hover {
     background: transparent;
     border: none;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
-                 0 0 15px rgba(0, 0, 0, 0.2),
-                 0 0 20px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0 10px #FFF700,
+                 0 0 15px #FFF700,
+                 0 0 20px #FFF700;
 }
 
 /* Responsive Design */
