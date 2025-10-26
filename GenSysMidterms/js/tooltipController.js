@@ -45,11 +45,12 @@ function updateTooltipPosition(e, element) {
     const offsetX = 15; // Distance from cursor
     const offsetY = 15; // Below cursor
 
-    // Check if element is in the left column (.controls)
+    // Check if element is in the left column (.controls) or is the scroll indicator
     const isInLeftColumn = element.closest('.controls');
+    const isScrollIndicator = element.classList.contains('scroll-indicator');
 
-    if (isInLeftColumn) {
-        // Position tooltip to the right of cursor for left column
+    if (isInLeftColumn || isScrollIndicator) {
+        // Position tooltip to the right of cursor for left column and scroll indicator
         tooltipElement.style.left = (e.clientX + offsetX) + 'px';
     } else {
         // Position tooltip to the left of cursor for other elements
@@ -86,6 +87,24 @@ function initTooltips() {
         });
 
         element.addEventListener('mouseleave', () => {
+            hideTooltip();
+        });
+
+        // Hide tooltip on interaction events
+        element.addEventListener('mousedown', () => {
+            hideTooltip();
+        });
+
+        element.addEventListener('click', () => {
+            hideTooltip();
+        });
+
+        // For sliders and inputs
+        element.addEventListener('input', () => {
+            hideTooltip();
+        });
+
+        element.addEventListener('change', () => {
             hideTooltip();
         });
     });

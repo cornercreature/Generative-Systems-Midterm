@@ -17,6 +17,7 @@ function initApp() {
     initRandomizer();
     initTooltips();
     initInfoToggle();
+    initScrollIndicator();
     initModalController();
 
     console.log('Color Picker App initialized successfully!');
