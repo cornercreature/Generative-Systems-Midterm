@@ -39,6 +39,41 @@ function closeReportModal() {
 }
 
 /**
+ * Downloads the modal content as a PNG image
+ */
+function downloadModalAsPNG() {
+    const modalContent = document.querySelector('.modal-content');
+
+    // Use html2canvas to capture the modal content
+    html2canvas(modalContent, {
+        backgroundColor: '#ffffff',
+        scale: 2, // Higher quality
+        logging: false,
+        useCORS: true
+    }).then(canvas => {
+        // Convert canvas to blob
+        canvas.toBlob(blob => {
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+
+            // Generate filename with timestamp
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+            link.download = `color-report-${timestamp}.png`;
+
+            link.href = url;
+            link.click();
+
+            // Clean up
+            URL.revokeObjectURL(url);
+        });
+    }).catch(error => {
+        console.error('Error generating PNG:', error);
+        alert('Error downloading report. Please try again.');
+    });
+}
+
+/**
  * Gathers current color data from all controllers
  * @returns {Object} Color data for background and circles
  */
@@ -199,9 +234,7 @@ function initModalController() {
     }
 
     if (downloadReportBtn) {
-        downloadReportBtn.addEventListener('click', () => {
-            alert('Download functionality coming soon!');
-        });
+        downloadReportBtn.addEventListener('click', downloadModalAsPNG);
     }
 
     if (modalOverlay) {
