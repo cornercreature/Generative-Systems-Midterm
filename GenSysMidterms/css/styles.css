@@ -321,7 +321,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, opacity 0.3s ease;
     padding: 0;
     border-radius: 8px;
 }
@@ -330,6 +330,15 @@ body {
     text-shadow: 0 0 10px #FFF700,
                  0 0 15px #FFF700,
                  0 0 20px #FFF700;
+}
+
+.collapsible-header.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.collapsible-header.disabled:hover {
+    text-shadow: none;
 }
 
 .collapse-icon {

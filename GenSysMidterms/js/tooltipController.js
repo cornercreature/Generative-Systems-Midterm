@@ -76,9 +76,9 @@ function initTooltips() {
     const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
 
     elementsWithTooltips.forEach(element => {
-        const tooltipText = element.getAttribute('data-tooltip');
-
         element.addEventListener('mouseenter', (e) => {
+            // Read tooltip text dynamically each time to support dynamic changes
+            const tooltipText = element.getAttribute('data-tooltip');
             showTooltip(e, tooltipText, element);
         });
 

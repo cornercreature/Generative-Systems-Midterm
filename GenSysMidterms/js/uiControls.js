@@ -11,6 +11,11 @@ function initCollapsibleSections() {
 
     collapsibleHeaders.forEach(header => {
         header.addEventListener('click', () => {
+            // Don't allow toggling if disabled
+            if (header.classList.contains('disabled')) {
+                return;
+            }
+
             const section = header.dataset.section;
             const content = document.getElementById(section + 'Content');
 

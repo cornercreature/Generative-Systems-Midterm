@@ -106,6 +106,9 @@ function initCircleInteraction() {
 
                 // Switch color control to circle 1
                 switchCircleTarget(1);
+
+                // Disable and collapse blur section (circle 1 has no blur)
+                disableBlurSection();
             } else {
                 circleOneController.classList.remove('dragging');
             }
@@ -129,6 +132,8 @@ function initCircleInteraction() {
                 switchCircleTarget(2);
                 // Auto-switch blur target to circle 2
                 switchBlurTarget(2);
+                // Enable blur section for circle 2
+                enableBlurSection();
             } else {
                 // Start dragging
                 isDraggingControllerTwo = true;
@@ -157,6 +162,8 @@ function initCircleInteraction() {
             switchCircleTarget(3);
             // Auto-switch blur target to circle 3
             switchBlurTarget(3);
+            // Enable blur section for circle 3
+            enableBlurSection();
         } else {
             // Start dragging
             isDraggingControllerThree = true;
@@ -355,4 +362,35 @@ function initCircleInteraction() {
 
         updateCirclesFromController();
     }, { passive: false });
+}
+
+/**
+ * Disables the blur section and changes tooltip
+ */
+function disableBlurSection() {
+    const blurHeader = document.getElementById('blurHeader');
+    const blurContent = document.getElementById('blurContent');
+
+    // Collapse the section
+    blurHeader.classList.add('collapsed');
+    blurContent.classList.add('collapsed');
+
+    // Disable interaction
+    blurHeader.classList.add('disabled');
+
+    // Change tooltip
+    blurHeader.setAttribute('data-tooltip', 'BLUR is only available for inner circles');
+}
+
+/**
+ * Enables the blur section and restores normal tooltip
+ */
+function enableBlurSection() {
+    const blurHeader = document.getElementById('blurHeader');
+
+    // Enable interaction
+    blurHeader.classList.remove('disabled');
+
+    // Restore normal tooltip
+    blurHeader.setAttribute('data-tooltip', 'BLUR circles here');
 }
