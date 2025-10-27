@@ -149,6 +149,11 @@ body {
     overflow-y: auto;
     border-right: 1px solid black;
     transition: padding-top 0.3s ease;
+    direction: rtl;
+}
+
+.controls > * {
+    direction: ltr;
 }
 
 .info-header.collapsed ~ .controls {
@@ -842,6 +847,43 @@ input[type="range"]::-moz-range-thumb {
         font-size: 12px;
         padding: 8px;
     }
+}
+
+/* ============================================
+   CUSTOM SCROLLBARS
+   ============================================ */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border-left: 0.5px solid black;
+    border-right: 0.5px solid black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+    border: 0.5px solid black;
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: white;
+    box-shadow: 0 0 8px #FFF700;
+}
+
+::-webkit-scrollbar-corner {
+    background: white;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: white white;
 }
 
 /* ============================================
