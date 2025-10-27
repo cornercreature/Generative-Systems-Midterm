@@ -1,0 +1,4 @@
+server/
+.DS_Store
+*.md
+start.sh

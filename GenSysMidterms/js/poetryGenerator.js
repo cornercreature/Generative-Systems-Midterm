@@ -164,7 +164,12 @@ async function generatePoem(colorData) {
 
     try {
         // Call our backend proxy server instead of Claude API directly
-        const response = await fetch('http://localhost:3000/api/generate-poem', {
+        // Use relative path so it works both locally (with proxy) and on Vercel
+        const apiUrl = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000/api/generate-poem'
+            : '/api/generate-poem';
+
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
