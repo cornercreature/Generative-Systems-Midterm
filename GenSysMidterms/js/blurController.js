@@ -4,7 +4,6 @@
 // ============================================
 
 // Blur control elements
-const blurTargetButtons = document.querySelectorAll('.blur-target-btn');
 const blurSlider = document.getElementById('blurSlider');
 const blurValue = document.getElementById('blurValue');
 
@@ -16,14 +15,13 @@ let circleThreeBlur = 2;
 /**
  * Switches the blur target circle
  * @param {number} target - Target circle (2 or 3)
+ * Now automatically called when circle controllers are selected
  */
 function switchBlurTarget(target) {
-    currentBlurTarget = target;
+    // Only switch if target is 2 or 3 (circle 1 doesn't have blur)
+    if (target !== 2 && target !== 3) return;
 
-    // Update button active states
-    blurTargetButtons.forEach(btn => {
-        btn.classList.toggle('active', parseInt(btn.dataset.blurCircle) === target);
-    });
+    currentBlurTarget = target;
 
     // Update slider to show current target's blur value
     if (target === 2) {
@@ -71,14 +69,6 @@ function getCurrentBlurState() {
  * Initializes blur controller with event listeners
  */
 function initBlurController() {
-    // Blur target switching
-    blurTargetButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetCircle = parseInt(btn.dataset.blurCircle);
-            switchBlurTarget(targetCircle);
-        });
-    });
-
     // Blur slider event listener
     blurSlider.addEventListener('input', updateBlur);
 }

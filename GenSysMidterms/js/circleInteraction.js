@@ -127,6 +127,8 @@ function initCircleInteraction() {
 
                 // Switch color control to circle 2
                 switchCircleTarget(2);
+                // Auto-switch blur target to circle 2
+                switchBlurTarget(2);
             } else {
                 // Start dragging
                 isDraggingControllerTwo = true;
@@ -153,6 +155,8 @@ function initCircleInteraction() {
 
             // Switch color control to circle 3
             switchCircleTarget(3);
+            // Auto-switch blur target to circle 3
+            switchBlurTarget(3);
         } else {
             // Start dragging
             isDraggingControllerThree = true;
