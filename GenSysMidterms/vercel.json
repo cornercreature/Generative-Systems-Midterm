@@ -1,14 +1,19 @@
 {
+  "headers": [
+    {
+      "source": "/typefaces/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/generate-poem",
       "destination": "/api/generate-poem.js"
-    },
-    {
-      "source": "/",
-      "destination": "/index.html"
     }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  ]
 }
