@@ -311,6 +311,7 @@ function initModalController() {
     const generateReportBtn = document.getElementById('generateReportBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const returnToGeneratorBtn = document.getElementById('returnToGeneratorBtn');
+    const exportChimeBtn = document.getElementById('exportChimeBtn');
     const downloadReportBtn = document.getElementById('downloadReportBtn');
     const modalOverlay = document.querySelector('.modal-overlay');
 
@@ -325,6 +326,13 @@ function initModalController() {
 
     if (returnToGeneratorBtn) {
         returnToGeneratorBtn.addEventListener('click', closeReportModal);
+    }
+
+    if (exportChimeBtn) {
+        exportChimeBtn.addEventListener('click', () => {
+            const colorData = generateReportData();
+            exportColorChime(colorData);
+        });
     }
 
     if (downloadReportBtn) {

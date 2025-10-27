@@ -142,3 +142,129 @@ function analyzeColorAudio(colorData) {
         color: item.color
     }));
 }
+
+/**
+ * Exports the color chime as a WAV audio file
+ * @param {Object} colorData - Color palette data
+ */
+function exportColorChime(colorData) {
+    // Create offline audio context for rendering
+    const sampleRate = 44100;
+    const duration = 3.5; // Slightly longer to capture full fade out
+    const offlineContext = new OfflineAudioContext(1, sampleRate * duration, sampleRate);
+
+    const now = offlineContext.currentTime;
+    const noteDuration = 2.5;
+
+    const colors = [
+        { color: colorData.background, name: 'Background', delay: 0 },
+        { color: colorData.circle1, name: 'Circle 1', delay: 0.15 },
+        { color: colorData.circle2, name: 'Circle 2', delay: 0.3 },
+        { color: colorData.circle3, name: 'Circle 3', delay: 0.45 }
+    ];
+
+    colors.forEach((item) => {
+        const frequency = colorToFrequency(item.color);
+        const volume = colorToVolume(item.color);
+        const waveType = colorToWaveType(item.color);
+
+        // Create oscillator
+        const oscillator = offlineContext.createOscillator();
+        const gainNode = offlineContext.createGain();
+
+        oscillator.type = waveType;
+        oscillator.frequency.setValueAtTime(frequency, now + item.delay);
+
+        // Envelope: fade in, sustain, fade out
+        gainNode.gain.setValueAtTime(0, now + item.delay);
+        gainNode.gain.linearRampToValueAtTime(volume, now + item.delay + 0.1);
+        gainNode.gain.setValueAtTime(volume, now + item.delay + noteDuration - 0.5);
+        gainNode.gain.linearRampToValueAtTime(0, now + item.delay + noteDuration);
+
+        // Connect nodes
+        oscillator.connect(gainNode);
+        gainNode.connect(offlineContext.destination);
+
+        // Start and stop
+        oscillator.start(now + item.delay);
+        oscillator.stop(now + item.delay + noteDuration);
+    });
+
+    // Render the audio
+    offlineContext.startRendering().then(renderedBuffer => {
+        // Convert AudioBuffer to WAV
+        const wav = audioBufferToWav(renderedBuffer);
+        const blob = new Blob([wav], { type: 'audio/wav' });
+
+        // Create download link
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'color-chime.wav';
+        a.click();
+
+        // Clean up
+        URL.revokeObjectURL(url);
+    }).catch(error => {
+        console.error('Error exporting chime:', error);
+    });
+}
+
+/**
+ * Converts an AudioBuffer to WAV format
+ * @param {AudioBuffer} buffer - The audio buffer to convert
+ * @returns {ArrayBuffer} WAV file data
+ */
+function audioBufferToWav(buffer) {
+    const numChannels = buffer.numberOfChannels;
+    const sampleRate = buffer.sampleRate;
+    const format = 1; // PCM
+    const bitDepth = 16;
+
+    const bytesPerSample = bitDepth / 8;
+    const blockAlign = numChannels * bytesPerSample;
+
+    const data = buffer.getChannelData(0);
+    const dataLength = data.length * bytesPerSample;
+    const bufferLength = 44 + dataLength;
+
+    const arrayBuffer = new ArrayBuffer(bufferLength);
+    const view = new DataView(arrayBuffer);
+
+    // Write WAV header
+    writeString(view, 0, 'RIFF');
+    view.setUint32(4, 36 + dataLength, true);
+    writeString(view, 8, 'WAVE');
+    writeString(view, 12, 'fmt ');
+    view.setUint32(16, 16, true); // fmt chunk size
+    view.setUint16(20, format, true);
+    view.setUint16(22, numChannels, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * blockAlign, true);
+    view.setUint16(32, blockAlign, true);
+    view.setUint16(34, bitDepth, true);
+    writeString(view, 36, 'data');
+    view.setUint32(40, dataLength, true);
+
+    // Write audio data
+    let offset = 44;
+    for (let i = 0; i < data.length; i++) {
+        const sample = Math.max(-1, Math.min(1, data[i]));
+        view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+        offset += 2;
+    }
+
+    return arrayBuffer;
+}
+
+/**
+ * Helper function to write strings to DataView
+ * @param {DataView} view - The DataView to write to
+ * @param {number} offset - Byte offset
+ * @param {string} string - String to write
+ */
+function writeString(view, offset, string) {
+    for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+    }
+}
