@@ -3,6 +3,12 @@
     {
       "source": "/api/generate-poem",
       "destination": "/api/generate-poem.js"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
