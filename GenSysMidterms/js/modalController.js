@@ -231,6 +231,9 @@ function drawCirclePreview(colorData) {
     const canvas = document.getElementById('circlePreviewCanvas');
     const ctx = canvas.getContext('2d');
 
+    // Debug: Log blur values
+    console.log('Blur State:', colorData.blurState);
+
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -275,32 +278,63 @@ function drawCirclePreview(colorData) {
 
     // Draw Circle 2 with actual position, size, and blur
     const circle2Hex = rgbToHex(colorData.circle2.r, colorData.circle2.g, colorData.circle2.b);
-    ctx.fillStyle = circle2Hex;
-    // Apply blur scaled proportionally
-    const circle2BlurScaled = colorData.blurState.circle2Blur * scaleFactor;
-    ctx.filter = `blur(${circle2BlurScaled}px)`;
-    ctx.beginPath();
     const circle2Radius = (state.sizes.circle2 / 2) * scaleFactor;
     const circle2X = centerX + (state.positions.circle2.x * scaleFactor);
     const circle2Y = centerY + (state.positions.circle2.y * scaleFactor);
-    ctx.arc(circle2X, circle2Y, circle2Radius, 0, Math.PI * 2);
-    ctx.fill();
+    const circle2Blur = colorData.blurState.circle2Blur;
+
+    ctx.fillStyle = circle2Hex;
+
+    if (circle2Blur > 0) {
+        // Amplify blur for better visibility
+        const circle2BlurScaled = circle2Blur * scaleFactor * 1.5;
+        ctx.shadowBlur = circle2BlurScaled;
+        ctx.shadowColor = circle2Hex;
+
+        // Draw multiple times for stronger blur effect
+        for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.arc(circle2X, circle2Y, circle2Radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        ctx.shadowBlur = 0;
+    } else {
+        // Draw once with no blur for crisp edges
+        ctx.beginPath();
+        ctx.arc(circle2X, circle2Y, circle2Radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
 
     // Draw Circle 3 with actual position, size, and blur
     const circle3Hex = rgbToHex(colorData.circle3.r, colorData.circle3.g, colorData.circle3.b);
-    ctx.fillStyle = circle3Hex;
-    // Apply blur scaled proportionally
-    const circle3BlurScaled = colorData.blurState.circle3Blur * scaleFactor;
-    ctx.filter = `blur(${circle3BlurScaled}px)`;
-    ctx.beginPath();
     const circle3Radius = (state.sizes.circle3 / 2) * scaleFactor;
     const circle3X = centerX + (state.positions.circle3.x * scaleFactor);
     const circle3Y = centerY + (state.positions.circle3.y * scaleFactor);
-    ctx.arc(circle3X, circle3Y, circle3Radius, 0, Math.PI * 2);
-    ctx.fill();
+    const circle3Blur = colorData.blurState.circle3Blur;
 
-    // Reset filter
-    ctx.filter = 'none';
+    ctx.fillStyle = circle3Hex;
+
+    if (circle3Blur > 0) {
+        // Amplify blur for better visibility
+        const circle3BlurScaled = circle3Blur * scaleFactor * 1.5;
+        ctx.shadowBlur = circle3BlurScaled;
+        ctx.shadowColor = circle3Hex;
+
+        // Draw multiple times for stronger blur effect
+        for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.arc(circle3X, circle3Y, circle3Radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        ctx.shadowBlur = 0;
+    } else {
+        // Draw once with no blur for crisp edges
+        ctx.beginPath();
+        ctx.arc(circle3X, circle3Y, circle3Radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
 }
 
 /**
